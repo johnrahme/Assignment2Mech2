@@ -9,6 +9,7 @@
       <itemPath>adConv.h</itemPath>
       <itemPath>lcd.h</itemPath>
       <itemPath>common.h</itemPath>
+      <itemPath>ser.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -22,6 +23,9 @@
       <itemPath>timer0.c</itemPath>
       <itemPath>adConv.c</itemPath>
       <itemPath>lcd.c</itemPath>
+      <itemPath>SPI.c</itemPath>
+      <itemPath>irobot.c</itemPath>
+      <itemPath>ser.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
