@@ -10,6 +10,7 @@
       <itemPath>lcd.h</itemPath>
       <itemPath>common.h</itemPath>
       <itemPath>ser.h</itemPath>
+      <itemPath>irobot.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -18,7 +19,6 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>main.c</itemPath>
       <itemPath>motor.c</itemPath>
       <itemPath>timer0.c</itemPath>
       <itemPath>adConv.c</itemPath>

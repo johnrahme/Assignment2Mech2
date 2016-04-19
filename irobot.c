@@ -1,14 +1,17 @@
+#include "ser.h"
 #include "irobot.h"
 
 void irobot_init(void){
-	putch(128);	//setup iRobot START OPCODE
-	putch(132);	//activate FULL MODE
+	ser_putch(128);	//setup iRobot START OPCODE
+	ser_putch(132);	//activate FULL MODE
 }
 
 void drive(void){
+    ser_putch(137);ser_putch(0);ser_putch(200);ser_putch(127);ser_putch(225);
 }
 
 void stop(void){
+    
 }
 
 signed int get_distance(void){								

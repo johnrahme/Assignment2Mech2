@@ -1,0 +1,143 @@
+Version 3.2 HI-TECH Software Intermediate Code
+"57 ser.h
+[v _ser_putch `(v ~T0 @X0 0 ef1`uc ]
+[; ;ser.h: 55: bit ser_isrx(void);
+[; ;ser.h: 56: unsigned char ser_getch(void);
+[; ;ser.h: 57: void ser_putch(unsigned char byte);
+[; ;ser.h: 58: void ser_puts(const char * s);
+[; ;ser.h: 59: void ser_puts2(unsigned char * s);
+[; ;ser.h: 60: void ser_puthex(unsigned char v);
+[; ;ser.h: 61: void ser_init(void);
+[; ;ser.h: 64: extern unsigned char rxfifo[16];
+[; ;ser.h: 65: extern volatile unsigned char rxiptr, rxoptr;
+[; ;ser.h: 66: extern bank1 unsigned char txfifo[16];
+[; ;ser.h: 67: extern volatile unsigned char txiptr, txoptr;
+[; ;ser.h: 68: extern unsigned char ser_tmp;
+[; ;irobot.h: 4: void drive(void);
+[; ;irobot.h: 5: void irobot_init(void);
+"4 irobot.c
+[v _irobot_init `(v ~T0 @X0 1 ef ]
+{
+[; ;irobot.c: 4: void irobot_init(void){
+[e :U _irobot_init ]
+[f ]
+[; ;irobot.c: 5: ser_putch(128);
+"5
+[e ( _ser_putch (1 -> -> 128 `i `uc ]
+[; ;irobot.c: 6: ser_putch(132);
+"6
+[e ( _ser_putch (1 -> -> 132 `i `uc ]
+[; ;irobot.c: 7: }
+"7
+[e :UE 1 ]
+}
+"9
+[v _drive `(v ~T0 @X0 1 ef ]
+{
+[; ;irobot.c: 9: void drive(void){
+[e :U _drive ]
+[f ]
+[; ;irobot.c: 10: ser_putch(137);ser_putch(0);ser_putch(200);ser_putch(127);ser_putch(225);
+"10
+[e ( _ser_putch (1 -> -> 137 `i `uc ]
+[e ( _ser_putch (1 -> -> 0 `i `uc ]
+[e ( _ser_putch (1 -> -> 200 `i `uc ]
+[e ( _ser_putch (1 -> -> 127 `i `uc ]
+[e ( _ser_putch (1 -> -> 225 `i `uc ]
+[; ;irobot.c: 11: }
+"11
+[e :UE 2 ]
+}
+"13
+[v _stop `(v ~T0 @X0 1 ef ]
+{
+[; ;irobot.c: 13: void stop(void){
+[e :U _stop ]
+[f ]
+[; ;irobot.c: 15: }
+"15
+[e :UE 3 ]
+}
+"17
+[v _get_distance `(i ~T0 @X0 1 ef ]
+{
+[; ;irobot.c: 17: signed int get_distance(void){
+[e :U _get_distance ]
+[f ]
+[; ;irobot.c: 18: }
+"18
+[e :UE 4 ]
+}
+"20
+[v _drive_distance `(v ~T0 @X0 1 ef1`i ]
+{
+[; ;irobot.c: 20: void drive_distance(signed int requiredDistance){
+[e :U _drive_distance ]
+[v _requiredDistance `i ~T0 @X0 1 r1 ]
+[f ]
+[; ;irobot.c: 21: }
+"21
+[e :UE 5 ]
+}
+"24
+[v _store_song `(v ~T0 @X0 1 ef ]
+{
+[; ;irobot.c: 24: void store_song(void){
+[e :U _store_song ]
+[f ]
+[; ;irobot.c: 25: }
+"25
+[e :UE 6 ]
+}
+"27
+[v _play_song `(v ~T0 @X0 1 ef ]
+{
+[; ;irobot.c: 27: void play_song(void){
+[e :U _play_song ]
+[f ]
+[; ;irobot.c: 28: }
+"28
+[e :UE 7 ]
+}
+"30
+[v _get_cliff `(uc ~T0 @X0 1 ef ]
+{
+[; ;irobot.c: 30: unsigned char get_cliff(void){
+[e :U _get_cliff ]
+[f ]
+[; ;irobot.c: 31: }
+"31
+[e :UE 8 ]
+}
+"33
+[v _drive_square `(v ~T0 @X0 1 ef ]
+{
+[; ;irobot.c: 33: void drive_square(void){
+[e :U _drive_square ]
+[f ]
+[; ;irobot.c: 34: }
+"34
+[e :UE 9 ]
+}
+"36
+[v _drive_angle `(v ~T0 @X0 1 ef2`i`uc ]
+{
+[; ;irobot.c: 36: void drive_angle(signed int requiredAngle, unsigned char direction){
+[e :U _drive_angle ]
+[v _requiredAngle `i ~T0 @X0 1 r1 ]
+[v _direction `uc ~T0 @X0 1 r2 ]
+[f ]
+[; ;irobot.c: 37: }
+"37
+[e :UE 10 ]
+}
+"39
+[v _get_angle `(i ~T0 @X0 1 ef ]
+{
+[; ;irobot.c: 39: signed int get_angle(void){
+[e :U _get_angle ]
+[f ]
+[; ;irobot.c: 40: }
+"40
+[e :UE 11 ]
+}

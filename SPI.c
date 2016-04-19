@@ -11,6 +11,8 @@
 																				 
 **********************************************************************************/
 #include <xc.h>
+#include "irobot.h"
+#include "ser.h"
 #pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
 
 //Defines
@@ -39,6 +41,7 @@ unsigned char spi_transfer(unsigned char data);
 // Interrupt service routine
 void interrupt isr(void){
 //Timer 1
+    ser_isrx();
     if(TMR0IF){
         TMR0IF = 0;
         TMR0 = TMR0_VAL;
@@ -89,9 +92,13 @@ unsigned char spi_transfer(unsigned char data){
 }
 
 void main(void){
+    ser_init();
+    irobot_init();
+    drive();
     setupSPI();
     unsigned char controlByte = 0b00001101;
     spi_transfer(controlByte);
+    
     while(1){
         if(FLAG_1000MS){
             RB0 = !RB0;

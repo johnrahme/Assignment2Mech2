@@ -1,0 +1,61 @@
+
+# 1 "irobot.c"
+
+# 55 "ser.h"
+bit ser_isrx(void);
+unsigned char ser_getch(void);
+void ser_putch(unsigned char byte);
+void ser_puts(const char * s);
+void ser_puts2(unsigned char * s);
+void ser_puthex(unsigned char v);
+void ser_init(void);
+
+
+extern unsigned char rxfifo[16];
+extern volatile unsigned char rxiptr, rxoptr;
+extern bank1 unsigned char txfifo[16];
+extern volatile unsigned char txiptr, txoptr;
+extern unsigned char ser_tmp;
+
+# 4 "irobot.h"
+void drive(void);
+void irobot_init(void);
+
+# 4 "irobot.c"
+void irobot_init(void){
+ser_putch(128);
+ser_putch(132);
+}
+
+void drive(void){
+ser_putch(137);ser_putch(0);ser_putch(200);ser_putch(127);ser_putch(225);
+}
+
+void stop(void){
+
+}
+
+signed int get_distance(void){
+}
+
+void drive_distance(signed int requiredDistance){
+}
+
+
+void store_song(void){
+}
+
+void play_song(void){
+}
+
+unsigned char get_cliff(void){
+}
+
+void drive_square(void){
+}
+
+void drive_angle(signed int requiredAngle, unsigned char direction){
+}
+
+signed int get_angle(void){
+}
