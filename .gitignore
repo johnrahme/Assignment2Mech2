@@ -48,4 +48,6 @@ Temporary Items
 
 # Project files
 nbproject/
+build/
+dist/
 *.mk
