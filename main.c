@@ -11,6 +11,7 @@
 #include "ser.h"
 #include "iRobot.h"
 #include "timer0.h"
+#include "lcd.h"
 
 
 #pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
@@ -45,13 +46,17 @@ void setup(void){
     initializeTimer0();
     setupIRobot();
     // Set RB0-RB3 as pushbuttons and RB4-RB5 as LED:S
-    TRISB = 0b00001111;  //For heartbeat LED
+    TRISB = 0b00001111;  //For LED:s and pushbuttons
+    //TRISC = 0;
+    
+    //setupLCD();
 }
 
 void main (void){
     setup();
     char stopped = 0;
     LED1 = 0;
+    LED0 = 0;
     //drive();
     char squarePatternDone = 1;
     while(1){
@@ -66,6 +71,9 @@ void main (void){
             //Square pattern function returns an a 0 if its not done and a 1 if it is done
             squarePatternDone = moveSquarePattern();
         }
+        //lcdSetCursor(0x00);
+        //lcdWriteToDigitBCD(130,4,0);
+        
         /*if(RTC_FLAG_90DEG&&stopped){
             drive();
             RTC_FLAG_90DEG = 0;
