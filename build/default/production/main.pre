@@ -1456,7 +1456,7 @@ void drive(void);
 void stop();
 
 
-# 14 "main.c"
+# 16 "main.c"
 #pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
 
 
