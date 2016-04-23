@@ -1,53 +1,50 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"2631 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic16f877a.h
-[v _T0IF `Vb ~T0 @X0 0 e@90 ]
+"2559 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic16f877a.h
+[v _RCIF `Vb ~T0 @X0 0 e@101 ]
+"65 ser.h
+[v _rxfifo `uc ~T0 @X0 -> 0 `x e ]
+"66
+[v _rxiptr `Vuc ~T0 @X0 0 e ]
+"1037 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic16f877a.h
+[v _RCREG `Vuc ~T0 @X0 0 e@26 ]
+"69 ser.h
+[v _ser_tmp `uc ~T0 @X0 0 e ]
+"66
+[v _rxoptr `Vuc ~T0 @X0 0 e ]
+"2755 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic16f877a.h
+[v _TXIF `Vb ~T0 @X0 0 e@100 ]
+"2753
+[v _TXIE `Vb ~T0 @X0 0 e@1124 ]
+"1031
+[v _TXREG `Vuc ~T0 @X0 0 e@25 ]
+"67 ser.h
+[v _txfifo `Xuc ~T0 @X0 -> 0 `x e ]
+"68
+[v _txoptr `Vuc ~T0 @X0 0 e ]
+[v _txiptr `Vuc ~T0 @X0 0 e ]
+"2651 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic16f877a.h
+[v _TMR0IF `Vb ~T0 @X0 0 e@90 ]
 "55
 [v _TMR0 `Vuc ~T0 @X0 0 e@1 ]
-"30 timer0.h
-[v _flashLed `(v ~T0 @X0 0 ef ]
-"28
-[v _debounceButtons `(v ~T0 @X0 0 ef ]
-"29
-[v _lcdRefresh `(v ~T0 @X0 0 ef ]
-"2331 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic16f877a.h
-[v _ADIF `Vb ~T0 @X0 0 e@102 ]
-"1337
-[v _TRISB `Vuc ~T0 @X0 0 e@134 ]
-"1398
-[v _TRISC `Vuc ~T0 @X0 0 e@135 ]
-"2521
-[v _RB4 `Vb ~T0 @X0 0 e@52 ]
-"2523
-[v _RB5 `Vb ~T0 @X0 0 e@53 ]
-"27 timer0.h
-[v _initializeTimer0 `(v ~T0 @X0 0 ef ]
-"7 adConv.h
-[v _initializeADC `(v ~T0 @X0 0 ef ]
-"27 lcd.h
-[v _setupLCD `(v ~T0 @X0 0 ef ]
-"40 main.c
-[v _initializeMotor `(i ~T0 @X0 0 ef ]
-[p mainexit ]
-"10 adConv.h
-[v _startADCConversion `(v ~T0 @X0 0 ef ]
-"8
-[v _readADCData `(i ~T0 @X0 0 ef ]
-"9
-[v _readADCMeter `(i ~T0 @X0 0 ef ]
-"19 lcd.h
-[v _lcdSetCursor `(v ~T0 @X0 0 ef1`uc ]
-"21
-[v _lcdWriteString `(v ~T0 @X0 0 ef1`*uc ]
-"24
-[v _lcdWriteToDigitBCD `(v ~T0 @X0 0 ef3`i`uc`uc ]
-"20 motor.h
-[v _move `(v ~T0 @X0 0 ef2`uc`uc ]
-"21
-[v _moveDeg `(v ~T0 @X0 0 ef1`d ]
 [v F1091 `(v ~T0 @X0 1 tf1`ul ]
 "152 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic.h
 [v __delay `JF1091 ~T0 @X0 0 e ]
 [p i __delay ]
+"62 ser.h
+[v _ser_init `(v ~T0 @X0 0 ef ]
+"2483 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic16f877a.h
+[v _PEIE `Vb ~T0 @X0 0 e@94 ]
+"2443
+[v _GIE `Vb ~T0 @X0 0 e@95 ]
+"23 iRobot.h
+[v _setupIRobot `(v ~T0 @X0 0 ef ]
+"1337 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic16f877a.h
+[v _TRISB `Vuc ~T0 @X0 0 e@134 ]
+[p mainexit ]
+"24 iRobot.h
+[v _drive `(v ~T0 @X0 0 ef ]
+"2513 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic16f877a.h
+[v _RB0 `Vb ~T0 @X0 0 e@48 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -1065,157 +1062,22 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 186: extern unsigned char __resetbits;
 [; ;pic.h: 187: extern __bit __powerdown;
 [; ;pic.h: 188: extern __bit __timeout;
-"15 motor.h
-[v _cstep `c ~T0 @X0 1 e ]
-[i _cstep
--> -> 0 `i `c
-]
-[; ;motor.h: 15: signed char cstep = 0;
-"16
-[v _nrOfSteps `i ~T0 @X0 1 e ]
-[i _nrOfSteps
--> 0 `i
-]
-[; ;motor.h: 16: signed int nrOfSteps = 0;
-"17
-[v _halfSteps `i ~T0 @X0 -> 0 `x e ]
-[i _halfSteps
-:U ..
--> 60 `i
--> 46 `i
--> 43 `i
--> 39 `i
--> 53 `i
--> 23 `i
--> 27 `i
--> 30 `i
-..
-]
-[; ;motor.h: 17: int halfSteps[] = {0b00111100, 0b00101110, 0b00101011, 0b00100111, 0b00110101, 0b00010111, 0b00011011, 0b00011110};
-"18
-[v _wholeSteps `i ~T0 @X0 -> 0 `x e ]
-[i _wholeSteps
-:U ..
--> 60 `i
--> 43 `i
--> 53 `i
--> 27 `i
-..
-]
-[; ;motor.h: 18: int wholeSteps[] = {0b00111100, 0b00101011, 0b00110101, 0b00011011};
-[; ;motor.h: 20: void move(char steps, char direction);
-[; ;motor.h: 21: void moveDeg(double deg);
-"6 timer0.h
-[v _rtcCounter `Vui ~T0 @X0 1 e ]
-[i _rtcCounter
--> -> 0 `i `ui
-]
-[; ;timer0.h: 6: volatile unsigned int rtcCounter = 0;
-"8
-[v _pb0Pressed `Vb ~T0 @X0 1 e ]
-[i _pb0Pressed
--> 0 `i
-]
-[; ;timer0.h: 8: volatile bit pb0Pressed = 0;
-"9
-[v _pb0Released `Vb ~T0 @X0 1 e ]
-[i _pb0Released
--> 0 `i
-]
-[; ;timer0.h: 9: volatile bit pb0Released = 0;
-"10
-[v _pbCounter `Vuc ~T0 @X0 1 e ]
-[i _pbCounter
--> -> 0 `i `uc
-]
-[; ;timer0.h: 10: volatile unsigned char pbCounter = 0;
-"12
-[v _pb1Pressed `Vb ~T0 @X0 1 e ]
-[i _pb1Pressed
--> 0 `i
-]
-[; ;timer0.h: 12: volatile bit pb1Pressed = 0;
-"13
-[v _pb1Released `Vb ~T0 @X0 1 e ]
-[i _pb1Released
--> 0 `i
-]
-[; ;timer0.h: 13: volatile bit pb1Released = 0;
-"14
-[v _pbCounter2 `Vuc ~T0 @X0 1 e ]
-[i _pbCounter2
--> -> 0 `i `uc
-]
-[; ;timer0.h: 14: volatile unsigned char pbCounter2 = 0;
-"16
-[v _pb2Pressed `Vb ~T0 @X0 1 e ]
-[i _pb2Pressed
--> 0 `i
-]
-[; ;timer0.h: 16: volatile bit pb2Pressed = 0;
-"17
-[v _pb2Released `Vb ~T0 @X0 1 e ]
-[i _pb2Released
--> 0 `i
-]
-[; ;timer0.h: 17: volatile bit pb2Released = 0;
-"18
-[v _pbCounter3 `Vuc ~T0 @X0 1 e ]
-[i _pbCounter3
--> -> 0 `i `uc
-]
-[; ;timer0.h: 18: volatile unsigned char pbCounter3 = 0;
-"20
-[v _pb3Pressed `Vb ~T0 @X0 1 e ]
-[i _pb3Pressed
--> 0 `i
-]
-[; ;timer0.h: 20: volatile bit pb3Pressed = 0;
-"21
-[v _pb3Released `Vb ~T0 @X0 1 e ]
-[i _pb3Released
--> 0 `i
-]
-[; ;timer0.h: 21: volatile bit pb3Released = 0;
-"22
-[v _pbCounter4 `Vuc ~T0 @X0 1 e ]
-[i _pbCounter4
--> -> 0 `i `uc
-]
-[; ;timer0.h: 22: volatile unsigned char pbCounter4 = 0;
-"24
-[v _updateLcdIRData `Vb ~T0 @X0 1 e ]
-[i _updateLcdIRData
--> 0 `i
-]
-[; ;timer0.h: 24: volatile bit updateLcdIRData = 0;
-"25
-[v _irLcdCounter `Vuc ~T0 @X0 1 e ]
-[i _irLcdCounter
--> -> 0 `i `uc
-]
-[; ;timer0.h: 25: volatile unsigned char irLcdCounter = 0;
-[; ;timer0.h: 27: void initializeTimer0();
-[; ;timer0.h: 28: void debounceButtons();
-[; ;timer0.h: 29: void lcdRefresh();
-[; ;timer0.h: 30: void flashLed();
-"6 adConv.h
-[v _conversionDone `Vb ~T0 @X0 1 e ]
-[i _conversionDone
--> 0 `i
-]
-[; ;adConv.h: 6: volatile bit conversionDone = 0;
-[; ;adConv.h: 7: void initializeADC();
-[; ;adConv.h: 8: int readADCData();
-[; ;adConv.h: 9: int readADCMeter();
-[; ;adConv.h: 10: void startADCConversion();
-[; ;lcd.h: 13: void lcdWriteControl(unsigned char databyte);
-[; ;lcd.h: 16: void lcd_WriteData(unsigned char databyte);
-[; ;lcd.h: 19: void lcdSetCursor(unsigned char address);
-[; ;lcd.h: 21: void lcdWriteString(char * s);
-[; ;lcd.h: 24: void lcdWriteToDigitBCD(signed int data, char digits, char showSign);
-[; ;lcd.h: 27: void setupLCD(void);
-"8 main.c
+[; ;ser.h: 56: bit ser_isrx(void);
+[; ;ser.h: 57: unsigned char ser_getch(void);
+[; ;ser.h: 58: void ser_putch(unsigned char byte);
+[; ;ser.h: 59: void ser_puts(const char * s);
+[; ;ser.h: 60: void ser_puts2(unsigned char * s);
+[; ;ser.h: 61: void ser_puthex(unsigned char v);
+[; ;ser.h: 62: void ser_init(void);
+[; ;ser.h: 65: extern unsigned char rxfifo[16];
+[; ;ser.h: 66: extern volatile unsigned char rxiptr, rxoptr;
+[; ;ser.h: 67: extern bank1 unsigned char txfifo[16];
+[; ;ser.h: 68: extern volatile unsigned char txiptr, txoptr;
+[; ;ser.h: 69: extern unsigned char ser_tmp;
+[; ;iRobot.h: 23: void setupIRobot(void);
+[; ;iRobot.h: 24: void drive(void);
+[; ;iRobot.h: 25: void stop();
+"14 main.c
 [p x BOREN=OFF ]
 [p x CPD=OFF ]
 [p x WRT=OFF ]
@@ -1224,259 +1086,148 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p x CP=OFF ]
 [p x LVP=OFF ]
 [p x PWRTE=OFF ]
-"11
-[v _motorToggle `b ~T0 @X0 1 e ]
-[i _motorToggle
+"19
+[v _RTC_FLAG_500MS `Vb ~T0 @X0 1 e ]
+[i _RTC_FLAG_500MS
 -> 0 `i
 ]
-[; ;main.c: 11: bit motorToggle = 0;
-[v F1145 `(v ~T0 @X0 1 tf ]
-"13
-[v _isr `IF1145 ~T0 @X0 1 e ]
+[; ;main.c: 19: volatile bit RTC_FLAG_500MS = 0;
+"22
+[v _RTC_Counter `Vui ~T0 @X0 1 e ]
+[i _RTC_Counter
+-> -> 0 `i `ui
+]
+[; ;main.c: 22: volatile unsigned int RTC_Counter = 0;
+[v F1125 `(v ~T0 @X0 1 tf ]
+"25
+[v _isr `IF1125 ~T0 @X0 1 e ]
+"26
 {
-[; ;main.c: 13: void interrupt isr(void){
+[; ;main.c: 25: void interrupt isr(void)
+[; ;main.c: 26: {
 [e :U _isr ]
 [f ]
-[; ;main.c: 14: if (T0IF){
-"14
-[e $ ! _T0IF 97  ]
+[; ;main.c: 28: if (RCIF) { rxfifo[rxiptr]=RCREG; ser_tmp=(rxiptr+1) & (16-1); if (ser_tmp!=rxoptr) rxiptr=ser_tmp; } if (TXIF && TXIE) { TXREG = txfifo[txoptr]; ++txoptr; txoptr &= (16-1); if (txoptr==txiptr) { TXIE = 0; } };
+"28
+[e $ ! _RCIF 97  ]
 {
-[; ;main.c: 15: T0IF = 0;
-"15
-[e = _T0IF -> -> 0 `i `b ]
-[; ;main.c: 16: TMR0 = 100;
-"16
-[e = _TMR0 -> -> 100 `i `uc ]
-[; ;main.c: 17: flashLed();
-"17
-[e ( _flashLed ..  ]
-[; ;main.c: 18: debounceButtons();
-"18
-[e ( _debounceButtons ..  ]
-[; ;main.c: 19: lcdRefresh();
-"19
-[e ( _lcdRefresh ..  ]
-"20
+[e = *U + &U _rxfifo * -> _rxiptr `ux -> -> # *U &U _rxfifo `ui `ux _RCREG ]
+[e = _ser_tmp -> & + -> _rxiptr `i -> 1 `i - -> 16 `i -> 1 `i `uc ]
+[e $ ! != -> _ser_tmp `i -> _rxoptr `i 98  ]
+[e = _rxiptr _ser_tmp ]
+[e :U 98 ]
 }
 [e :U 97 ]
-[; ;main.c: 20: }
-[; ;main.c: 21: if(ADIF){
-"21
-[e $ ! _ADIF 98  ]
+[e $ ! && _TXIF _TXIE 99  ]
 {
-[; ;main.c: 22: conversionDone = 1;
-"22
-[e = _conversionDone -> -> 1 `i `b ]
-[; ;main.c: 23: ADIF = 0;
-"23
-[e = _ADIF -> -> 0 `i `b ]
-"24
-}
-[e :U 98 ]
-[; ;main.c: 24: }
-[; ;main.c: 25: }
-"25
-[e :UE 96 ]
-}
-"26
-[v _initialise `(v ~T0 @X0 1 ef ]
+[e = _TXREG *U + &U _txfifo * -> _txoptr `ux -> -> # *U &U _txfifo `ui `ux ]
+[e =+ _txoptr -> -> 1 `i `uc ]
+[e =& _txoptr -> - -> 16 `i -> 1 `i `uc ]
+[e $ ! == -> _txoptr `i -> _txiptr `i 100  ]
 {
-[; ;main.c: 26: void initialise (void){
-[e :U _initialise ]
-[f ]
-[; ;main.c: 29: TRISB = 0b00001111;
-"29
-[e = _TRISB -> -> 15 `i `uc ]
-[; ;main.c: 30: TRISC = 0;
-"30
-[e = _TRISC -> -> 0 `i `uc ]
-[; ;main.c: 33: RB4 = 1;
+[e = _TXIE -> -> 0 `i `b ]
+}
+[e :U 100 ]
+}
+[e :U 99 ]
+[; ;main.c: 31: if(TMR0IF){
+"31
+[e $ ! _TMR0IF 101  ]
+{
+[; ;main.c: 32: TMR0IF = 0;
+"32
+[e = _TMR0IF -> -> 0 `i `b ]
+[; ;main.c: 33: TMR0 = 100;
 "33
-[e = _RB4 -> -> 1 `i `b ]
-[; ;main.c: 34: RB5 = 1;
-"34
-[e = _RB5 -> -> 1 `i `b ]
-[; ;main.c: 37: initializeTimer0();
+[e = _TMR0 -> -> 100 `i `uc ]
+[; ;main.c: 35: RTC_Counter++;
+"35
+[e ++ _RTC_Counter -> -> 1 `i `ui ]
+[; ;main.c: 37: if(RTC_Counter % 500 == 0) {
 "37
-[e ( _initializeTimer0 ..  ]
-[; ;main.c: 38: initializeADC();
+[e $ ! == % _RTC_Counter -> -> 500 `i `ui -> -> 0 `i `ui 102  ]
+{
+[; ;main.c: 38: RTC_FLAG_500MS = 1;
 "38
-[e ( _initializeADC ..  ]
-[; ;main.c: 39: setupLCD();
+[e = _RTC_FLAG_500MS -> -> 1 `i `b ]
+[; ;main.c: 39: RTC_Counter = 0;
 "39
-[e ( _setupLCD ..  ]
-[; ;main.c: 40: initializeMotor();
+[e = _RTC_Counter -> -> 0 `i `ui ]
 "40
-[e ( _initializeMotor ..  ]
-[; ;main.c: 44: }
-"44
-[e :UE 99 ]
 }
-"46
-[v _main `(v ~T0 @X0 1 ef ]
-{
-[; ;main.c: 46: void main (void) {
-[e :U _main ]
-[f ]
-[; ;main.c: 48: initialise();
-"48
-[e ( _initialise ..  ]
-[; ;main.c: 50: startADCConversion();
-"50
-[e ( _startADCConversion ..  ]
-[; ;main.c: 51: while(1){
-"51
 [e :U 102 ]
-{
-[; ;main.c: 54: if(conversionDone){
-"54
-[e $ ! _conversionDone 104  ]
-{
-[; ;main.c: 55: conversionDone = 0;
-"55
-[e = _conversionDone -> -> 0 `i `b ]
-"56
-[v _result `i ~T0 @X0 1 a ]
-[; ;main.c: 56: int result = readADCData();
-[e = _result ( _readADCData ..  ]
-"57
-[v _resultInMeters `i ~T0 @X0 1 a ]
-[; ;main.c: 57: int resultInMeters = readADCMeter();
-[e = _resultInMeters ( _readADCMeter ..  ]
-[; ;main.c: 58: if(updateLcdIRData){
-"58
-[e $ ! _updateLcdIRData 105  ]
-{
-[; ;main.c: 59: lcdSetCursor(0x00);
-"59
-[e ( _lcdSetCursor (1 -> -> 0 `i `uc ]
-[; ;main.c: 60: lcdWriteString("Raw:");
-"60
-[e ( _lcdWriteString (1 -> :s 1C `*uc ]
-[; ;main.c: 61: lcdWriteToDigitBCD(result,4,0);
-"61
-[e ( _lcdWriteToDigitBCD (3 , , _result -> -> 4 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 62: lcdSetCursor(0x09);
-"62
-[e ( _lcdSetCursor (1 -> -> 9 `i `uc ]
-[; ;main.c: 63: lcdWriteString("=>");
-"63
-[e ( _lcdWriteString (1 -> :s 2C `*uc ]
-[; ;main.c: 64: lcdWriteToDigitBCD(resultInMeters,3,0);
-"64
-[e ( _lcdWriteToDigitBCD (3 , , _resultInMeters -> -> 3 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 65: lcdWriteString("cm");
-"65
-[e ( _lcdWriteString (1 -> :s 3C `*uc ]
-[; ;main.c: 66: updateLcdIRData = 0;
-"66
-[e = _updateLcdIRData -> -> 0 `i `b ]
-"67
-}
-[e :U 105 ]
-[; ;main.c: 67: }
-[; ;main.c: 69: startADCConversion();
-"69
-[e ( _startADCConversion ..  ]
-"71
-}
-[e :U 104 ]
-[; ;main.c: 71: }
-[; ;main.c: 73: if(pb0Pressed){
-"73
-[e $ ! _pb0Pressed 106  ]
-{
-[; ;main.c: 74: move(1,1);
-"74
-[e ( _move (2 , -> -> 1 `i `uc -> -> 1 `i `uc ]
-[; ;main.c: 75: RB4 = !RB4;
-"75
-[e = _RB4 ! _RB4 ]
-[; ;main.c: 76: pb0Pressed = 0;
-"76
-[e = _pb0Pressed -> -> 0 `i `b ]
-"77
-}
-[e :U 106 ]
-[; ;main.c: 77: }
-[; ;main.c: 79: if(pb1Pressed){
-"79
-[e $ ! _pb1Pressed 107  ]
-{
-[; ;main.c: 80: move(1,0);
-"80
-[e ( _move (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 81: pb1Pressed = 0;
-"81
-[e = _pb1Pressed -> -> 0 `i `b ]
-"82
-}
-[e :U 107 ]
-[; ;main.c: 82: }
-[; ;main.c: 84: if(pb2Pressed){
-"84
-[e $ ! _pb2Pressed 108  ]
-{
-[; ;main.c: 85: if(motorToggle){
-"85
-[e $ ! _motorToggle 109  ]
-{
-[; ;main.c: 86: moveDeg(-180);
-"86
-[e ( _moveDeg (1 -> -U -> 180 `i `d ]
-"87
-}
-[; ;main.c: 87: }
-[e $U 110  ]
-"88
-[e :U 109 ]
-[; ;main.c: 88: else{
-{
-[; ;main.c: 89: moveDeg(180);
-"89
-[e ( _moveDeg (1 -> -> 180 `i `d ]
-"90
-}
-[e :U 110 ]
-[; ;main.c: 90: }
-[; ;main.c: 91: motorToggle = !motorToggle;
-"91
-[e = _motorToggle ! _motorToggle ]
-[; ;main.c: 92: pb2Pressed = 0;
-"92
-[e = _pb2Pressed -> -> 0 `i `b ]
-"93
-}
-[e :U 108 ]
-[; ;main.c: 93: }
-[; ;main.c: 95: if(pb3Pressed){
-"95
-[e $ ! _pb3Pressed 111  ]
-{
-[; ;main.c: 96: RB4 = !RB4;
-"96
-[e = _RB4 ! _RB4 ]
-[; ;main.c: 97: pb3Pressed = 0;
-"97
-[e = _pb3Pressed -> -> 0 `i `b ]
-"98
-}
-[e :U 111 ]
-[; ;main.c: 98: }
-[; ;main.c: 100: _delay((unsigned long)((20)*(20000000/4000.0)));
-"100
-[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-"101
+"41
 }
 [e :U 101 ]
-"51
-[e $U 102  ]
-[e :U 103 ]
-[; ;main.c: 101: }
-[; ;main.c: 102: }
-"102
-[e :UE 100 ]
+[; ;main.c: 40: }
+[; ;main.c: 41: }
+[; ;main.c: 42: }
+"42
+[e :UE 96 ]
 }
-[a 3C 99 109 0 ]
-[a 2C 61 62 0 ]
-[a 1C 82 97 119 58 0 ]
+"44
+[v _setup `(v ~T0 @X0 1 ef ]
+{
+[; ;main.c: 44: void setup(void){
+[e :U _setup ]
+[f ]
+[; ;main.c: 45: _delay((unsigned long)((5000)*(20000000/4000.0)));
+"45
+[e ( __delay (1 -> * -> -> 5000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;main.c: 46: ser_init();
+"46
+[e ( _ser_init ..  ]
+[; ;main.c: 47: PEIE = 1;
+"47
+[e = _PEIE -> -> 1 `i `b ]
+[; ;main.c: 48: GIE = 1;
+"48
+[e = _GIE -> -> 1 `i `b ]
+[; ;main.c: 49: setupIRobot();
+"49
+[e ( _setupIRobot ..  ]
+[; ;main.c: 51: TRISB = 0;
+"51
+[e = _TRISB -> -> 0 `i `uc ]
+[; ;main.c: 52: }
+"52
+[e :UE 103 ]
+}
+"54
+[v _main `(v ~T0 @X0 1 ef ]
+{
+[; ;main.c: 54: void main (void){
+[e :U _main ]
+[f ]
+[; ;main.c: 55: setup();
+"55
+[e ( _setup ..  ]
+[; ;main.c: 56: drive();
+"56
+[e ( _drive ..  ]
+[; ;main.c: 57: while(1){
+"57
+[e :U 106 ]
+{
+[; ;main.c: 58: if(RTC_FLAG_500MS){
+"58
+[e $ ! _RTC_FLAG_500MS 108  ]
+{
+[; ;main.c: 59: RB0 = !RB0;
+"59
+[e = _RB0 ! _RB0 ]
+"60
+}
+[e :U 108 ]
+"61
+}
+[e :U 105 ]
+"57
+[e $U 106  ]
+[e :U 107 ]
+[; ;main.c: 60: }
+[; ;main.c: 61: }
+[; ;main.c: 63: }
+"63
+[e :UE 104 ]
+}

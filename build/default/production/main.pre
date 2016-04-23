@@ -1434,160 +1434,76 @@ extern unsigned char __resetbits;
 extern __bit __powerdown;
 extern __bit __timeout;
 
-# 15 "motor.h"
-signed char cstep = 0;
-signed int nrOfSteps = 0;
-int halfSteps[] = {0b00111100, 0b00101110, 0b00101011, 0b00100111, 0b00110101, 0b00010111, 0b00011011, 0b00011110};
-int wholeSteps[] = {0b00111100, 0b00101011, 0b00110101, 0b00011011};
-
-void move(char steps, char direction);
-void moveDeg(double deg);
-
-# 6 "timer0.h"
-volatile unsigned int rtcCounter = 0;
-
-volatile bit pb0Pressed = 0;
-volatile bit pb0Released = 0;
-volatile unsigned char pbCounter = 0;
-
-volatile bit pb1Pressed = 0;
-volatile bit pb1Released = 0;
-volatile unsigned char pbCounter2 = 0;
-
-volatile bit pb2Pressed = 0;
-volatile bit pb2Released = 0;
-volatile unsigned char pbCounter3 = 0;
-
-volatile bit pb3Pressed = 0;
-volatile bit pb3Released = 0;
-volatile unsigned char pbCounter4 = 0;
-
-volatile bit updateLcdIRData = 0;
-volatile unsigned char irLcdCounter = 0;
-
-void initializeTimer0();
-void debounceButtons();
-void lcdRefresh();
-void flashLed();
-
-# 6 "adConv.h"
-volatile bit conversionDone = 0;
-void initializeADC();
-int readADCData();
-int readADCMeter();
-void startADCConversion();
-
-# 13 "lcd.h"
-void lcdWriteControl(unsigned char databyte);
+# 56 "ser.h"
+bit ser_isrx(void);
+unsigned char ser_getch(void);
+void ser_putch(unsigned char byte);
+void ser_puts(const char * s);
+void ser_puts2(unsigned char * s);
+void ser_puthex(unsigned char v);
+void ser_init(void);
 
 
-void lcd_WriteData(unsigned char databyte);
+extern unsigned char rxfifo[16];
+extern volatile unsigned char rxiptr, rxoptr;
+extern bank1 unsigned char txfifo[16];
+extern volatile unsigned char txiptr, txoptr;
+extern unsigned char ser_tmp;
+
+# 23 "iRobot.h"
+void setupIRobot(void);
+void drive(void);
+void stop();
 
 
-void lcdSetCursor(unsigned char address);
-
-void lcdWriteString(char * s);
-
-
-void lcdWriteToDigitBCD(signed int data, char digits, char showSign);
-
-
-void setupLCD(void);
-
-
-# 8 "main.c"
+# 14 "main.c"
 #pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
 
 
-bit motorToggle = 0;
 
-void interrupt isr(void){
-if (T0IF){
-T0IF = 0;
+
+volatile bit RTC_FLAG_500MS = 0;
+
+
+volatile unsigned int RTC_Counter = 0;
+
+
+void interrupt isr(void)
+{
+
+if (RCIF) { rxfifo[rxiptr]=RCREG; ser_tmp=(rxiptr+1) & (16-1); if (ser_tmp!=rxoptr) rxiptr=ser_tmp; } if (TXIF && TXIE) { TXREG = txfifo[txoptr]; ++txoptr; txoptr &= (16-1); if (txoptr==txiptr) { TXIE = 0; } };
+
+
+if(TMR0IF){
+TMR0IF = 0;
 TMR0 = 100;
-flashLed();
-debounceButtons();
-lcdRefresh();
+
+RTC_Counter++;
+
+if(RTC_Counter % 500 == 0) {
+RTC_FLAG_500MS = 1;
+RTC_Counter = 0;
 }
-if(ADIF){
-conversionDone = 1;
-ADIF = 0;
 }
-}
-void initialise (void){
-
-
-TRISB = 0b00001111;
-TRISC = 0;
-
-
-RB4 = 1;
-RB5 = 1;
-
-
-initializeTimer0();
-initializeADC();
-setupLCD();
-initializeMotor();
-
-
-
 }
 
-void main (void) {
+void setup(void){
+_delay((unsigned long)((5000)*(20000000/4000.0)));
+ser_init();
+PEIE = 1;
+GIE = 1;
+setupIRobot();
 
-initialise();
+TRISB = 0;
+}
 
-startADCConversion();
+void main (void){
+setup();
+drive();
 while(1){
-
-
-if(conversionDone){
-conversionDone = 0;
-int result = readADCData();
-int resultInMeters = readADCMeter();
-if(updateLcdIRData){
-lcdSetCursor(0x00);
-lcdWriteString("Raw:");
-lcdWriteToDigitBCD(result,4,0);
-lcdSetCursor(0x09);
-lcdWriteString("=>");
-lcdWriteToDigitBCD(resultInMeters,3,0);
-lcdWriteString("cm");
-updateLcdIRData = 0;
+if(RTC_FLAG_500MS){
+RB0 = !RB0;
+}
 }
 
-startADCConversion();
-
-}
-
-if(pb0Pressed){
-move(1,1);
-RB4 = !RB4;
-pb0Pressed = 0;
-}
-
-if(pb1Pressed){
-move(1,0);
-pb1Pressed = 0;
-}
-
-if(pb2Pressed){
-if(motorToggle){
-moveDeg(-180);
-}
-else{
-moveDeg(180);
-}
-motorToggle = !motorToggle;
-pb2Pressed = 0;
-}
-
-if(pb3Pressed){
-RB4 = !RB4;
-pb3Pressed = 0;
-}
-
-_delay((unsigned long)((20)*(20000000/4000.0)));
-}
 }

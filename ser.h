@@ -29,6 +29,7 @@
 
 #ifndef _SER_H_
 #define _SER_H_
+#include "common.h"
 
 /* Valid buffer size value are only power of 2 (ex: 2,4,..,64,128) */
 #define SER_BUFFER_SIZE		16

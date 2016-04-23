@@ -1,5 +1,6 @@
- build/default/production/irobot.d  \
- build/default/production/irobot.p1:  \
- irobot.c  \
-irobot.h  \
+ build/default/production/iRobot.d  \
+ build/default/production/iRobot.p1:  \
+ iRobot.c  \
+iRobot.h  \
+common.h  \
 ser.h 

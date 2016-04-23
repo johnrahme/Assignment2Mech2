@@ -32,7 +32,6 @@
 */
 
 #define _SER_C_
-#include <htc.h>
 #include "ser.h"
 
 unsigned char rxfifo[SER_BUFFER_SIZE];
@@ -127,7 +126,8 @@ void ser_init(void)
 	TXIE=0;
 	RCIE=1;
 	TXEN=1;
-	//PEIE=1;		//enable peripheral interrupts and global interrupts in main function
+	PEIE=1;		//enable peripheral interrupts and global interrupts in main function
+
 
 	rxiptr=rxoptr=txiptr=txoptr=0;
 }
