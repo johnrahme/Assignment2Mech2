@@ -12,7 +12,6 @@
 #include "iRobot.h"
 
 
-
 #pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
 
 #define TMR0_VAL 100	//timer0 start count
