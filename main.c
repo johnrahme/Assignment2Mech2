@@ -10,17 +10,14 @@
 #include "common.h"
 #include "ser.h"
 #include "iRobot.h"
+#include "timer0.h"
 
 
 #pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
 
 #define TMR0_VAL 100	//timer0 start count
-#define HBLED RB0
+#define DEG_PER_SEC 85;
 
-volatile bit RTC_FLAG_500MS = 0;
-
-//global variables
-volatile unsigned int RTC_Counter = 0;
 
 // Interrupt service routine
 void interrupt isr(void)
@@ -32,21 +29,16 @@ void interrupt isr(void)
     if(TMR0IF){
         TMR0IF = 0;
         TMR0 = TMR0_VAL;
-
-        RTC_Counter++;
-        //set clock flags
-        if(RTC_Counter % 500 == 0) {
-            RTC_FLAG_500MS = 1;
-            RTC_Counter = 0;	//reset RTC Counter
-        }
+        flashLed();
+        squareTimers();
     }
 }
 
 void setup(void){
     __delay_ms(5000);   // Safety delay while iRobot serial buffers are streaming stuff
-    ser_init();
-    PEIE = 1;
-    GIE = 1;
+    ser_init(); 
+      //Timer initialization
+    initializeTimer0();
     setupIRobot();
 
     TRISB = 0;  //For heartbeat LED
@@ -54,10 +46,30 @@ void setup(void){
 
 void main (void){
     setup();
+    char stopped = 0;
+    LED1 = 0;
+    //turnCW();
     drive();
     while(1){
-        if(RTC_FLAG_500MS){
-            HBLED = !HBLED;
+        /*if(RTC_FLAG_90DEG&&stopped){
+            drive();
+            RTC_FLAG_90DEG = 0;
+            stopped = 0;
+        }
+        if(RTC_FLAG_90DEG&&!stopped){
+            turnCW();
+            RTC_FLAG_90DEG = 0;
+            stopped = 1;
+        }*/
+        if(RTC_20000MS_COUNTER&&stopped){
+            drive();
+            RTC_FLAG_20000MS = 0;
+            stopped = 0;
+        }
+        if(RTC_FLAG_20000MS&&!stopped){
+            stop();
+            RTC_20000MS_COUNTER = 0;
+            stopped = 1;
         }
     }
 

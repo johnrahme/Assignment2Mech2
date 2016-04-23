@@ -23,6 +23,9 @@
 void setupIRobot(void);
 void drive(void);
 void stop();
+void squareTest(void);
+void stopAfter40(void);
+void turnCW(void);
 
 #endif	/* IROBOT_H */
 
