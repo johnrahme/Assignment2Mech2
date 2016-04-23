@@ -25,7 +25,7 @@ void stop(void){
 void moveDistanceForward(int centimeters){
     RTC_MOVE_PATTERN_COUNTER = 0; //Reset the counter
     // 21053/4/100 = 52.6325 ---> milliseconds to move one centimeter
-    int timeToMoveOneCentimeter = 53;
+    int timeToMoveOneCentimeter = 53; // Should probably be a float number instead
     int totalTimeToMove = centimeters*timeToMoveOneCentimeter;
     //Set the time for the counter to wait until next step in pattern
     MOVE_PATTERN_TIME = totalTimeToMove;
@@ -36,7 +36,7 @@ void moveDistanceForward(int centimeters){
 void turnDegreesCW(int degrees){
     RTC_MOVE_PATTERN_COUNTER = 0; //Reset the counter
     // 1130/90 = 12.55 ---> milliseconds to move one degree
-    int timeToMoveOneDegree = 13;
+    int timeToMoveOneDegree = 13; // Should probably be a float number instead
     int totalTimeToTurn = degrees*timeToMoveOneDegree;
     //Set the time for the counter to wait until next step in pattern
     MOVE_PATTERN_TIME = totalTimeToTurn;
@@ -72,7 +72,9 @@ char moveSquarePattern(){
         
         LED0 = 0;
         LED1 = 0;
+        // Return 1 to show that pattern is over
         return 1;
     }
+    //Return 0 if pattern is not over
     return 0;
 }

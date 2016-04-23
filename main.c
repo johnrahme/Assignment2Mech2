@@ -31,8 +31,9 @@ void interrupt isr(void)
         TMR0 = TMR0_VAL;
         //User timer0 source function to flash a led
         //flashLed();
-        //Increment counter for robot movement
-        squareTimers();
+        //Increment counter for the current pattern
+        updateMovePattern();
+        //Debounce the buttons
         debounceButtons();
     }
 }
@@ -43,7 +44,7 @@ void setup(void){
       //Timer initialization
     initializeTimer0();
     setupIRobot();
-
+    // Set RB0-RB3 as pushbuttons and RB4-RB5 as LED:S
     TRISB = 0b00001111;  //For heartbeat LED
 }
 
@@ -55,11 +56,12 @@ void main (void){
     char squarePatternDone = 1;
     while(1){
         
-        //If square pattern is not done update it
+        
         if(pb0Pressed){
             squarePatternDone = 0;
             pb0Pressed = 0;
         }
+        //If square pattern is not done update it
         if(!squarePatternDone){
             //Square pattern function returns an a 0 if its not done and a 1 if it is done
             squarePatternDone = moveSquarePattern();

@@ -39,6 +39,6 @@ void initializeTimer0();
 void debounceButtons();
 void lcdRefresh();
 void flashLed();
-void squareTimers();
+void updateMovePattern();
 
 #endif TIMER0_H
