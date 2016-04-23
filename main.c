@@ -61,14 +61,14 @@ void main (void){
             RTC_FLAG_90DEG = 0;
             stopped = 1;
         }*/
-        if(RTC_20000MS_COUNTER&&stopped){
+        if(RTC_FLAG_20000MS&&stopped){
             drive();
             RTC_FLAG_20000MS = 0;
             stopped = 0;
         }
         if(RTC_FLAG_20000MS&&!stopped){
             stop();
-            RTC_20000MS_COUNTER = 0;
+            RTC_FLAG_20000MS = 0;
             stopped = 1;
         }
     }

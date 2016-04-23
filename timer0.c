@@ -47,7 +47,7 @@ void squareTimers(){
             RTC_90DEG_COUNTER = 0;
       }
     RTC_20000MS_COUNTER++;
-      if(RTC_20000MS_COUNTER % 20000 == 0){
+      if(RTC_20000MS_COUNTER % 21053 == 0){
             RTC_FLAG_20000MS = 1;
             RTC_20000MS_COUNTER = 0;
       }
