@@ -24,6 +24,10 @@ volatile unsigned char pbCounter4 = 0;
 volatile bit updateLcdIRData = 0; //Update refresh bit flag
 volatile unsigned char irLcdCounter = 0; //LCD counters
 
+volatile bit RTC_FLAG_MOVE_PATTERN = 0;
+volatile unsigned int RTC_MOVE_PATTERN_COUNTER = 0;
+volatile unsigned int MOVE_PATTERN_TIME = 0;
+
 volatile bit RTC_FLAG_90DEG = 0;
 volatile unsigned int RTC_90DEG_COUNTER = 0;
 

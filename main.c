@@ -29,8 +29,11 @@ void interrupt isr(void)
     if(TMR0IF){
         TMR0IF = 0;
         TMR0 = TMR0_VAL;
-        flashLed();
+        //User timer0 source function to flash a led
+        //flashLed();
+        //Increment counter for robot movement
         squareTimers();
+        debounceButtons();
     }
 }
 
@@ -41,16 +44,26 @@ void setup(void){
     initializeTimer0();
     setupIRobot();
 
-    TRISB = 0;  //For heartbeat LED
+    TRISB = 0b00001111;  //For heartbeat LED
 }
 
 void main (void){
     setup();
     char stopped = 0;
     LED1 = 0;
-    //turnCW();
-    drive();
+    //drive();
+    char squarePatternDone = 1;
     while(1){
+        
+        //If square pattern is not done update it
+        if(pb0Pressed){
+            squarePatternDone = 0;
+            pb0Pressed = 0;
+        }
+        if(!squarePatternDone){
+            //Square pattern function returns an a 0 if its not done and a 1 if it is done
+            squarePatternDone = moveSquarePattern();
+        }
         /*if(RTC_FLAG_90DEG&&stopped){
             drive();
             RTC_FLAG_90DEG = 0;
@@ -61,16 +74,6 @@ void main (void){
             RTC_FLAG_90DEG = 0;
             stopped = 1;
         }*/
-        if(RTC_FLAG_20000MS&&stopped){
-            drive();
-            RTC_FLAG_20000MS = 0;
-            stopped = 0;
-        }
-        if(RTC_FLAG_20000MS&&!stopped){
-            stop();
-            RTC_FLAG_20000MS = 0;
-            stopped = 1;
-        }
     }
 
 }

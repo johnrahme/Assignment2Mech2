@@ -46,10 +46,10 @@ void squareTimers(){
             RTC_FLAG_90DEG = 1;
             RTC_90DEG_COUNTER = 0;
       }
-    RTC_20000MS_COUNTER++;
-      if(RTC_20000MS_COUNTER % 21053 == 0){
-            RTC_FLAG_20000MS = 1;
-            RTC_20000MS_COUNTER = 0;
+    RTC_MOVE_PATTERN_COUNTER++;
+      if(RTC_MOVE_PATTERN_COUNTER % MOVE_PATTERN_TIME == 0){
+            RTC_FLAG_MOVE_PATTERN = 1;
+            RTC_MOVE_PATTERN_COUNTER = 0;
       }
 }
 
