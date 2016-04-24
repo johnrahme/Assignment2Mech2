@@ -45,6 +45,7 @@ void turnDegreesCW(int degrees){
     LED1 = 0;
     
 }
+//-----MOVE PATTERNS START-----
 char moveSquarePattern(){
     
     if(patternStage == 0||(RTC_FLAG_MOVE_PATTERN&&patternStage == 2)||(RTC_FLAG_MOVE_PATTERN&&patternStage == 4)||(RTC_FLAG_MOVE_PATTERN&&patternStage == 6)){
@@ -78,3 +79,16 @@ char moveSquarePattern(){
     //Return 0 if pattern is not over
     return 0;
 }
+
+//-----MOVE PATTERNS END-----
+
+//-----SENSOR READINGS START----
+int getTraveledDistance(){
+    int distance = 0;
+    ser_putch(142); //Set to read sensors
+    ser_putch(19); //Set drive packet ID
+    distance = ser_getch()*256+ser_getch(); //Combine high bit with low bit 
+    return distance;
+}
+
+//-----SENSOR READINGS END-----

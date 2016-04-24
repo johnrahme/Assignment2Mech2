@@ -25,6 +25,7 @@ void drive(void);
 void stop(void);
 char moveSquarePattern(void);
 void turnCW(void);
+int getTraveledDistance(void);
 
 #endif	/* IROBOT_H */
 

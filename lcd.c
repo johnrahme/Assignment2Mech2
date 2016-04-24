@@ -83,7 +83,12 @@ void lcdWriteString(char * s){
 
     //function initalises the LCD module - check that ADCON1 setting doesn't conflict
     void setupLCD(void){
-
+        //Set port A to analogue and E to digital 
+        PCFG3 = 0;
+        PCFG2 = 0;
+        PCFG1 = 1;
+        PCFG0 = 1;
+        
         PORTD = 0;				//set all pins on portd low
         PORTE = 0;				//set all pins on porte low
 

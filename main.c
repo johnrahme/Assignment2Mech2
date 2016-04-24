@@ -47,43 +47,39 @@ void setup(void){
     setupIRobot();
     // Set RB0-RB3 as pushbuttons and RB4-RB5 as LED:S
     TRISB = 0b00001111;  //For LED:s and pushbuttons
-    //TRISC = 0;
     
-    //setupLCD();
+    setupLCD();//THIS MIGHT FK UP THE ROBOT FROM MOVING DONT KNOW YET, GOTTA TRY IT
 }
 
 void main (void){
     setup();
     char stopped = 0;
+    int distanceTraveled = 0;
     LED1 = 0;
     LED0 = 0;
-    //drive();
+    
+    lcdSetCursor(0x00);
+    lcdWriteString("I am iRobot!");
+    
     char squarePatternDone = 1;
     while(1){
         
-        
+        //Start the square pattern if PB0 is pressed
         if(pb0Pressed){
             squarePatternDone = 0;
             pb0Pressed = 0;
+        
         }
         //If square pattern is not done update it
         if(!squarePatternDone){
             //Square pattern function returns an a 0 if its not done and a 1 if it is done
             squarePatternDone = moveSquarePattern();
         }
-        //lcdSetCursor(0x00);
-        //lcdWriteToDigitBCD(130,4,0);
         
-        /*if(RTC_FLAG_90DEG&&stopped){
-            drive();
-            RTC_FLAG_90DEG = 0;
-            stopped = 0;
-        }
-        if(RTC_FLAG_90DEG&&!stopped){
-            turnCW();
-            RTC_FLAG_90DEG = 0;
-            stopped = 1;
-        }*/
+        //Update the LCD with the distance travelled
+        //distanceTraveled += getTraveledDistance(); // Freezes program if not connected to robot 
+        lcdSetCursor(0x40);
+        lcdWriteToDigitBCD(distanceTraveled, 4, 0);
     }
 
 }
