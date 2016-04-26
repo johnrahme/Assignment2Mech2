@@ -68,12 +68,14 @@ void main (void){
         
         //Start the square pattern if PB0 is pressed
         if(pb0Pressed){
+            distanceTraveled = 0; //added in to 0 the total distance traveled at the start of the function
             squarePatternDone = 0;
             patternDone = 0;
             pb0Pressed = 0;
         }
         
         if(pb1Pressed){
+            distanceTraveled = 0; //added in to 0 the total distance traveled at the start of the function
             straightPatternDone = 0;
             patternDone = 0;
             pb1Pressed = 0;

@@ -25,7 +25,7 @@ void stop(void){
 void moveDistanceForward(int centimeters){
     RTC_MOVE_PATTERN_COUNTER = 0; //Reset the counter
     // 21053/4/100 = 52.6325 ---> milliseconds to move one centimeter
-    int timeToMoveOneCentimeter = 51; // Should probably be a float number instead
+    int timeToMoveOneCentimeter = 52; // Should probably be a float number instead
     int totalTimeToMove = centimeters*timeToMoveOneCentimeter;
     //Set the time for the counter to wait until next step in pattern
     MOVE_PATTERN_TIME = totalTimeToMove;
