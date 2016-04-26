@@ -12,6 +12,7 @@
 #include "iRobot.h"
 #include "timer0.h"
 #include "lcd.h"
+#include "adConv.h"
 
 
 #pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
@@ -37,6 +38,10 @@ void interrupt isr(void)
         //Debounce the buttons
         debounceButtons();
     }
+    if(ADIF){
+        conversionDone = 1; //Set conversion done flag
+        ADIF = 0;
+    }
 }
 
 void setup(void){
@@ -47,7 +52,7 @@ void setup(void){
     setupIRobot();
     // Set RB0-RB3 as pushbuttons and RB4-RB5 as LED:S
     TRISB = 0b00001111;  //For LED:s and pushbuttons
-    
+    initializeADC();
     setupLCD();//THIS MIGHT FK UP THE ROBOT FROM MOVING DONT KNOW YET, GOTTA TRY IT
 }
 
@@ -58,13 +63,34 @@ void main (void){
     LED1 = 0;
     LED0 = 0;
     
-    lcdSetCursor(0x00);
-    lcdWriteString("I am iRobot!");
+    //lcdSetCursor(0x00);
+    //lcdWriteString("I am iRobot!");
     
     char patternDone = 1;
     char squarePatternDone = 1;
     char straightPatternDone = 1;
+    
+    startADCConversion();
     while(1){
+        //Check ADC coversion
+        if(conversionDone){ //Check conversion done flags
+            conversionDone = 0;
+            int result = readADCData(); // Read data from ADC
+            int resultInMeters = readADCMeter(); //Read data and convert to meters
+            if(updateLcdIRData){ // Check LCD refresh rate and print to LCD
+                lcdSetCursor(0x00);
+                lcdWriteString("Raw:");
+                lcdWriteToDigitBCD(result,4,0);
+                lcdSetCursor(0x09);
+                lcdWriteString("=>");
+                lcdWriteToDigitBCD(resultInMeters,3,0);
+                lcdWriteString("cm");
+                updateLcdIRData = 0;
+            }
+            // Restart the ADC conversion
+            startADCConversion();
+            
+        }
         
         //Start the square pattern if PB0 is pressed
         if(pb0Pressed){
