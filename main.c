@@ -12,13 +12,9 @@
 #include "iRobot.h"
 #include "timer0.h"
 #include "lcd.h"
-<<<<<<< HEAD
 #include "SPI.h"
 #include "motor.h"
-=======
 #include "adConv.h"
-
->>>>>>> origin/master
 
 #pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
 
@@ -53,21 +49,17 @@ void interrupt isr(void)
 
 void setup(void){
     __delay_ms(5000);   // Safety delay while iRobot serial buffers are streaming stuff
+    setupSPI();
     ser_init(); 
       //Timer initialization
     initializeTimer0();
     setupIRobot();
     // Set RB0-RB3 as pushbuttons and RB4-RB5 as LED:S
-    TRISB = 0b00001111;  //For LED:s and pushbuttons
-<<<<<<< HEAD
+    TRISB = 0b00001111;  //For LED:s and pushbuttons  
     
-    setupSPI();
     //Set SPI to motor
     setToMotorCW();
-    
-=======
     initializeADC();
->>>>>>> origin/master
     setupLCD();//THIS MIGHT FK UP THE ROBOT FROM MOVING DONT KNOW YET, GOTTA TRY IT
 }
 

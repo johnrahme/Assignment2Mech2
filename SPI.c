@@ -24,7 +24,7 @@ void setupSPI(void){
     SSPSTAT = 0b01000000;
     SSPCON = 0b00100000;
     TRISC = 0b11010000;
-    PORTC = 0b00000011;
+    PORTC |= 0b00000011;
 
 }
 
