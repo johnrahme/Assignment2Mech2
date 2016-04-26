@@ -50,7 +50,7 @@ void turnDegreesCW(int degrees){
 
 char moveStraightPattern()
 {
-    if(patternStage == 0&&RTC_FLAG_MOVE_PATTERN){
+    if(patternStage == 0){
         //Move forward 400 cm
         moveDistanceForward(400);
         //increment pattern stage
