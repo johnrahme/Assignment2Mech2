@@ -12,8 +12,13 @@
 #include "iRobot.h"
 #include "timer0.h"
 #include "lcd.h"
+<<<<<<< HEAD
 #include "SPI.h"
 #include "motor.h"
+=======
+#include "adConv.h"
+
+>>>>>>> origin/master
 
 #pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
 
@@ -40,6 +45,10 @@ void interrupt isr(void)
         time_count++;
         moveMotorCont();
     }
+    if(ADIF){
+        conversionDone = 1; //Set conversion done flag
+        ADIF = 0;
+    }
 }
 
 void setup(void){
@@ -50,28 +59,38 @@ void setup(void){
     setupIRobot();
     // Set RB0-RB3 as pushbuttons and RB4-RB5 as LED:S
     TRISB = 0b00001111;  //For LED:s and pushbuttons
+<<<<<<< HEAD
     
     setupSPI();
     //Set SPI to motor
     setToMotorCW();
     
+=======
+    initializeADC();
+>>>>>>> origin/master
     setupLCD();//THIS MIGHT FK UP THE ROBOT FROM MOVING DONT KNOW YET, GOTTA TRY IT
 }
 
 void main (void){
     setup();
-    char stopped = 0;
     int distanceTraveled = 0;
     LED1 = 0;
     LED0 = 0;
     
-    lcdSetCursor(0x00);
-    lcdWriteString("I am iRobot!");
+    //lcdSetCursor(0x40);
+    //lcdWriteString("I am iRobot!");
     
     char patternDone = 1;
     char squarePatternDone = 1;
     char straightPatternDone = 1;
+    
+    startADCConversion();
     while(1){
+        //Check ADC coversion
+        if(conversionDone){ //Check conversion done flags
+            conversionDone = 0; 
+            printADCData(); //Prints the conversion data to the LCD
+        }
         
         //Start the square pattern if PB0 is pressed
         if(pb0Pressed){
@@ -106,7 +125,7 @@ void main (void){
                
         
         //Update the LCD with the distance travelled
-        distanceTraveled += getTraveledDistance(); // Freezes program if not connected to robot 
+        //distanceTraveled += getTraveledDistance(); // Freezes program if not connected to robot 
         lcdSetCursor(0x40);
         lcdWriteToDigitBCD(distanceTraveled, 4, 0);
     }
