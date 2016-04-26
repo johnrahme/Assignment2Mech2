@@ -61,19 +61,36 @@ void main (void){
     lcdSetCursor(0x00);
     lcdWriteString("I am iRobot!");
     
+    char patternDone = 1;
     char squarePatternDone = 1;
+    char straightPatternDone = 1;
     while(1){
         
         //Start the square pattern if PB0 is pressed
         if(pb0Pressed){
             squarePatternDone = 0;
+            patternDone = 0;
             pb0Pressed = 0;
-        
         }
-        //If square pattern is not done update it
-        if(!squarePatternDone){
+        
+        if(pb1Pressed){
+            straightPatternDone = 0;
+            patternDone = 0;
+            pb1Pressed = 0;
+        }
+        
+              
+            //If square pattern is not done update it
+        if(!patternDone&&!squarePatternDone){
             //Square pattern function returns an a 0 if its not done and a 1 if it is done
+            
             squarePatternDone = moveSquarePattern();
+            patternDone = squarePatternDone;
+        }
+        if(!patternDone&&!straightPatternDone){
+            //Square pattern function returns an a 0 if its not done and a 1 if it is done
+            straightPatternDone = moveStraightPattern();
+            patternDone = straightPatternDone;
         }
         
         //Update the LCD with the distance travelled

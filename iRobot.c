@@ -25,7 +25,7 @@ void stop(void){
 void moveDistanceForward(int centimeters){
     RTC_MOVE_PATTERN_COUNTER = 0; //Reset the counter
     // 21053/4/100 = 52.6325 ---> milliseconds to move one centimeter
-    int timeToMoveOneCentimeter = 53; // Should probably be a float number instead
+    int timeToMoveOneCentimeter = 51; // Should probably be a float number instead
     int totalTimeToMove = centimeters*timeToMoveOneCentimeter;
     //Set the time for the counter to wait until next step in pattern
     MOVE_PATTERN_TIME = totalTimeToMove;
@@ -46,6 +46,34 @@ void turnDegreesCW(int degrees){
     
 }
 //-----MOVE PATTERNS START-----
+
+
+char moveStraightPattern()
+{
+    if(patternStage == 0&&RTC_FLAG_MOVE_PATTERN){
+        //Move forward 400 cm
+        moveDistanceForward(400);
+        //increment pattern stage
+        patternStage++;
+        //Reset Pattern Flag
+        RTC_FLAG_MOVE_PATTERN = 0;
+    }
+    else if (RTC_FLAG_MOVE_PATTERN&&patternStage == 1){
+        //End of pattern stop the motor
+        stop();
+        //Reset pattern stage
+        patternStage = 0;
+        RTC_FLAG_MOVE_PATTERN = 0;
+        
+        LED0 = 0;
+        LED1 = 0;
+        // Return 1 to show that pattern is over
+        return 1;
+    }
+    //Return 0 if pattern is not over
+    return 0;
+}
+
 char moveSquarePattern(){
     
     if(patternStage == 0||(RTC_FLAG_MOVE_PATTERN&&patternStage == 2)||(RTC_FLAG_MOVE_PATTERN&&patternStage == 4)||(RTC_FLAG_MOVE_PATTERN&&patternStage == 6)){
@@ -56,7 +84,7 @@ char moveSquarePattern(){
         //Reset Pattern Flag
         RTC_FLAG_MOVE_PATTERN = 0;
     }
-    else if((RTC_FLAG_MOVE_PATTERN&&patternStage == 1)||(RTC_FLAG_MOVE_PATTERN&&patternStage == 3) || (RTC_FLAG_MOVE_PATTERN&&patternStage == 5)){
+    else if((RTC_FLAG_MOVE_PATTERN&&patternStage == 1)||(RTC_FLAG_MOVE_PATTERN&&patternStage == 3) || (RTC_FLAG_MOVE_PATTERN&&patternStage == 5)|| (RTC_FLAG_MOVE_PATTERN&&patternStage == 7)){
         //Move forward 100 cm
         turnDegreesCW(90);
         //increment pattern stage
@@ -64,7 +92,7 @@ char moveSquarePattern(){
         //Reset Pattern Flag
         RTC_FLAG_MOVE_PATTERN = 0;
     }
-    else if (RTC_FLAG_MOVE_PATTERN&&patternStage == 7){
+    else if (RTC_FLAG_MOVE_PATTERN&&patternStage == 8){
         //End of pattern stop the motor
         stop();
         //Reset pattern stage
