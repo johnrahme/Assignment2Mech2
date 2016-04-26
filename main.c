@@ -58,12 +58,11 @@ void setup(void){
 
 void main (void){
     setup();
-    char stopped = 0;
     int distanceTraveled = 0;
     LED1 = 0;
     LED0 = 0;
     
-    //lcdSetCursor(0x00);
+    //lcdSetCursor(0x40);
     //lcdWriteString("I am iRobot!");
     
     char patternDone = 1;
@@ -74,22 +73,8 @@ void main (void){
     while(1){
         //Check ADC coversion
         if(conversionDone){ //Check conversion done flags
-            conversionDone = 0;
-            int result = readADCData(); // Read data from ADC
-            int resultInMeters = readADCMeter(); //Read data and convert to meters
-            if(updateLcdIRData){ // Check LCD refresh rate and print to LCD
-                lcdSetCursor(0x00);
-                lcdWriteString("Raw:");
-                lcdWriteToDigitBCD(result,4,0);
-                lcdSetCursor(0x09);
-                lcdWriteString("=>");
-                lcdWriteToDigitBCD(resultInMeters,3,0);
-                lcdWriteString("cm");
-                updateLcdIRData = 0;
-            }
-            // Restart the ADC conversion
-            startADCConversion();
-            
+            conversionDone = 0; 
+            printADCData(); //Prints the conversion data to the LCD
         }
         
         //Start the square pattern if PB0 is pressed
@@ -122,7 +107,7 @@ void main (void){
         }
         
         //Update the LCD with the distance travelled
-        distanceTraveled += getTraveledDistance(); // Freezes program if not connected to robot 
+        //distanceTraveled += getTraveledDistance(); // Freezes program if not connected to robot 
         lcdSetCursor(0x40);
         lcdWriteToDigitBCD(distanceTraveled, 4, 0);
     }

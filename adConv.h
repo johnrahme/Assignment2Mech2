@@ -8,6 +8,7 @@ void initializeADC();
 int readADCData();
 int readADCMeter();
 void startADCConversion();
+void printADCData();
 
 
 #endif ADCONV_H

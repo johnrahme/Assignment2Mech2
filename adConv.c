@@ -1,6 +1,7 @@
 #include <xc.h>
 #include "adConv.h"
 #include <math.h>
+#include "lcd.h"
 
 void initializeADC(){
     //Set output on PORT A
@@ -37,7 +38,10 @@ int readADCData(){
 int readADCMeter(){
     int raw = readADCData();
     double rawInverted =  1.0/((double) raw);
-    double k = 18609;
+    //For 4.0
+    double k = 15015;
+    //For 3.3 volt
+    //double k = 18609; 
     double m = -1.6803;
     double result = rawInverted*k + m;
     int resultInInt = (int) round(result);
@@ -49,4 +53,20 @@ void startADCConversion(){
        __delay_ms(1);
        //Set GO/DONE
        GO = 1;
+}
+
+void printADCData(){
+             int result = readADCData(); // Read data from ADC
+            int resultInMeters = readADCMeter(); //Read data and convert to meters
+            if(1){ // Check LCD refresh rate and print to LCD
+                lcdSetCursor(0x00);
+                lcdWriteString("Raw:");
+                lcdWriteToDigitBCD(result,4,0);
+                lcdSetCursor(0x09);
+                lcdWriteString("=>");
+                lcdWriteToDigitBCD(resultInMeters,3,0);
+                lcdWriteString("cm");
+            }
+            // Restart the ADC conversion
+            startADCConversion();    
 }
