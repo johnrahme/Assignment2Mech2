@@ -43,7 +43,7 @@ void updateMovePattern(){
     
     
     RTC_MOVE_PATTERN_COUNTER++;
-      if(RTC_MOVE_PATTERN_COUNTER % MOVE_PATTERN_TIME == 0){
+      if(RTC_MOVE_PATTERN_COUNTER == MOVE_PATTERN_TIME){
             RTC_FLAG_MOVE_PATTERN = 1;
             RTC_MOVE_PATTERN_COUNTER = 0;
       }

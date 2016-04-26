@@ -77,7 +77,7 @@ void main (void){
         }
         
         //Update the LCD with the distance travelled
-        //distanceTraveled += getTraveledDistance(); // Freezes program if not connected to robot 
+        distanceTraveled += getTraveledDistance(); // Freezes program if not connected to robot 
         lcdSetCursor(0x40);
         lcdWriteToDigitBCD(distanceTraveled, 4, 0);
     }

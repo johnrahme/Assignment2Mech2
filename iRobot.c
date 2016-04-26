@@ -36,7 +36,7 @@ void moveDistanceForward(int centimeters){
 void turnDegreesCW(int degrees){
     RTC_MOVE_PATTERN_COUNTER = 0; //Reset the counter
     // 1130/90 = 12.55 ---> milliseconds to move one degree
-    int timeToMoveOneDegree = 13; // Should probably be a float number instead
+    int timeToMoveOneDegree = 11; // Should probably be a float number instead
     int totalTimeToTurn = degrees*timeToMoveOneDegree;
     //Set the time for the counter to wait until next step in pattern
     MOVE_PATTERN_TIME = totalTimeToTurn;
@@ -86,8 +86,12 @@ char moveSquarePattern(){
 int getTraveledDistance(){
     int distance = 0;
     ser_putch(142); //Set to read sensors
+    __delay_ms(5);
     ser_putch(19); //Set drive packet ID
-    distance = ser_getch()*256+ser_getch(); //Combine high bit with low bit 
+    __delay_ms(5);
+    distance = ser_getch()*256;
+    __delay_ms(5);
+    distance += ser_getch(); //Combine high bit with low bit 
     return distance;
 }
 
