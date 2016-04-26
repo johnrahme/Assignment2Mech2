@@ -46,3 +46,7 @@ void setToMotorCW(){
     unsigned char controlByte = 0b00001101;
     spi_transfer(controlByte);
 }
+void setToMotorCCW(){
+    unsigned char controlByte = 0b00001111;
+    spi_transfer(controlByte);
+}

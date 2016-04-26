@@ -19,6 +19,7 @@ volatile bit FLAG_1000MS;
 void setupSPI(void);
 unsigned char spi_transfer(unsigned char data);
 void setToMotorCW(void);
+void setToMotorCCW(void);
 
 
 

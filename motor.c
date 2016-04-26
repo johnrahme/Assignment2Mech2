@@ -24,48 +24,20 @@ void initializeMotor(){
     lcdWriteToDigitBCD(nrOfSteps,4,1);
 }
 
-//Function moves half steps in the specified direction
+//Set the motor to move steps in a specific direction
 void move(char steps, char direction){
-    for(char i = 0; i<steps; i++){
-        //Reset if clockwise
-         if(cstep == 7 && direction == CLOCKWISE){
-            PORTC = halfSteps[0];
-            cstep = 0;
-         }
-         //Reset if counter-clockwise
-         else if(cstep == 0 && direction == COUNTER_CLOCKWISE){
-            PORTC = halfSteps[7];
-            cstep = 7;
-         }
-         //Otherwise step in specified direction
-         else if (cstep >= 0 && cstep <= 7){
-             if(direction == CLOCKWISE){
-                PORTC = halfSteps[cstep+1]; 
-                cstep++;
-             }
-             else if(direction == COUNTER_CLOCKWISE){
-                PORTC = halfSteps[cstep-1];
-                cstep--;
-             }
-             
-         }
-         else{
-               PORTC = 0x00;
-         }
-         
-         //Write steps to LCD
-         lcdSetCursor(0x40);
-         lcdWriteString("steps:");
-         if(direction==CLOCKWISE){
-             nrOfSteps++;
-             lcdWriteToDigitBCD(nrOfSteps,4,1);
-         }
-         else{
-             nrOfSteps--;
-             lcdWriteToDigitBCD(nrOfSteps,4,1);
-         }     
-        __delay_ms(SPEED);
+    if(direction == CLOCKWISE){
+        // USes she SPI to set the motor to CW
+        setToMotorCW();
     }
+    else if(direction == COUNTER_CLOCKWISE){
+        // USes she SPI to set the motor to CCW
+        setToMotorCCW();
+    }
+   for(int i = 0; i<steps; i++){
+        SM_STEP();
+        __delay_ms(SPEED);
+   }
 }
 
 //Move the specified degree using the degree per step
@@ -83,6 +55,7 @@ void moveDeg(double deg){
 
 
 void moveMotorCont(void){
+    time_count++;
     if(time_count % 1 == 0) {
             //FLAG_10MS = 1;
             SM_STEP();

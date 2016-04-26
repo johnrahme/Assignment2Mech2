@@ -38,8 +38,8 @@ void interrupt isr(void)
         updateMovePattern();
         //Debounce the buttons
         debounceButtons();
-        time_count++;
-        moveMotorCont();
+        
+        //moveMotorCont();
     }
     if(ADIF){
         conversionDone = 1; //Set conversion done flag
@@ -78,6 +78,7 @@ void main (void){
     
     startADCConversion();
     while(1){
+        move(10,0);
         //Check ADC coversion
         if(conversionDone){ //Check conversion done flags
             conversionDone = 0; 

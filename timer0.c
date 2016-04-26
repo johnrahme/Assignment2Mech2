@@ -49,6 +49,7 @@ void updateMovePattern(){
       }
 }
 
+
 //Debounce buttons SB2, SB3, SB4 and SB5
 void debounceButtons(){
 
