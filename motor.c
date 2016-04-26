@@ -10,10 +10,10 @@
 #include <math.h>
 #include "motor.h"
 #include "lcd.h"
+#include "SPI.h"
 #define CLOCKWISE 1 //Define clockwise and counter-clockwise
 #define COUNTER_CLOCKWISE 0
-#define STEPS_PER_ROTATION 48
-#define DEG_PER_STEP 7.5 //Define step size
+#define DEG_PER_STEP 1.8 //Define step size
 #define SPEED 20 //Define motor speed
 
 void initializeMotor(){
@@ -79,4 +79,13 @@ void moveDeg(double deg){
         stepsToMove = (char) round(deg/(DEG_PER_STEP/2.0)); 
         move(stepsToMove,1);
     }
+}
+
+
+void moveMotorCont(void){
+    if(time_count % 1 == 0) {
+            //FLAG_10MS = 1;
+            SM_STEP();
+            time_count = 0;
+     }
 }

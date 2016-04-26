@@ -12,7 +12,8 @@
 #include "iRobot.h"
 #include "timer0.h"
 #include "lcd.h"
-
+#include "SPI.h"
+#include "motor.h"
 
 #pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
 
@@ -36,6 +37,8 @@ void interrupt isr(void)
         updateMovePattern();
         //Debounce the buttons
         debounceButtons();
+        time_count++;
+        moveMotorCont();
     }
 }
 
@@ -47,6 +50,10 @@ void setup(void){
     setupIRobot();
     // Set RB0-RB3 as pushbuttons and RB4-RB5 as LED:S
     TRISB = 0b00001111;  //For LED:s and pushbuttons
+    
+    setupSPI();
+    //Set SPI to motor
+    setToMotorCW();
     
     setupLCD();//THIS MIGHT FK UP THE ROBOT FROM MOVING DONT KNOW YET, GOTTA TRY IT
 }
@@ -95,10 +102,14 @@ void main (void){
             patternDone = straightPatternDone;
         }
         
+        
+               
+        
         //Update the LCD with the distance travelled
         distanceTraveled += getTraveledDistance(); // Freezes program if not connected to robot 
         lcdSetCursor(0x40);
         lcdWriteToDigitBCD(distanceTraveled, 4, 0);
     }
+    
 
 }
