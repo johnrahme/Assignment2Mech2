@@ -43,10 +43,12 @@ unsigned char spi_transfer(unsigned char data){
 }
 
 void setToMotorCW(){
+    //Set full step and motor CW
     unsigned char controlByte = 0b00001101;
     spi_transfer(controlByte);
 }
 void setToMotorCCW(){
+    //Set full step and motor CCW
     unsigned char controlByte = 0b00001111;
     spi_transfer(controlByte);
 }

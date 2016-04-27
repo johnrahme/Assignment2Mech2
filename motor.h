@@ -18,7 +18,7 @@ int halfSteps[] = {STEP0, STEP1, STEP2, STEP3, STEP4, STEP5, STEP6, STEP7}; //Ar
 int wholeSteps[] = {STEP0, STEP2, STEP4, STEP6}; //Array with whole steps
 
 void move(char direction);
-void moveOld(char steps, char direction);
+void moveOld(int steps, char direction);
 void moveDeg(double deg);
 void moveMotorCont(void);
 

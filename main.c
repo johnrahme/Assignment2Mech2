@@ -40,6 +40,7 @@ void interrupt isr(void)
         //Debounce the buttons
         debounceButtons();
         stepperMotorCounter();
+        lcdRefresh();
         
         //moveMotorCont();
     }
@@ -102,8 +103,15 @@ void main (void){
             pb1Pressed = 0;
         }
         if(pb2Pressed){
+            setScannerSpeed(1);
             scanRunning = 1;
+            //moveOld(100,0);
+            //moveOld(100,0);
             pb2Pressed = 0;
+        }
+        if(pb3Pressed){
+            resetToOrigin();
+            pb3Pressed = 0;
         }
         updateScanner();
               
@@ -125,8 +133,8 @@ void main (void){
         
         //Update the LCD with the distance travelled
         //distanceTraveled += getTraveledDistance(); // Freezes program if not connected to robot 
-        lcdSetCursor(0x40);
-        lcdWriteToDigitBCD(distanceTraveled, 4, 0);
+        //lcdSetCursor(0x40);
+        //lcdWriteToDigitBCD(distanceTraveled, 4, 0);
     }
     
 

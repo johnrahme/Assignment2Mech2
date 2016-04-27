@@ -14,7 +14,7 @@
 #define CLOCKWISE 1 //Define clockwise and counter-clockwise
 #define COUNTER_CLOCKWISE 0
 #define DEG_PER_STEP 1.8 //Define step size
-#define SPEED 20 //Define motor speed
+#define SPEED 5 //Define motor speed
 
 void initializeMotor(){
     //Initialize motor to step 0 and write to LCD
@@ -25,7 +25,7 @@ void initializeMotor(){
 }
 
 //Set the motor to move steps in a specific direction
-void moveOld(char steps, char direction){
+void moveOld(int steps, char direction){
     if(direction == CLOCKWISE){
         // USes she SPI to set the motor to CW
         setToMotorCW();

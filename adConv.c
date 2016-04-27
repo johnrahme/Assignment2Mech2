@@ -2,6 +2,7 @@
 #include "adConv.h"
 #include <math.h>
 #include "lcd.h"
+#include "timer0.h"
 
 void initializeADC(){
     //Set output on PORT A
@@ -50,23 +51,27 @@ int readADCMeter(){
 //Start the ADC coversion
 void startADCConversion(){
        //acquisition time
-       __delay_ms(1);
+       __delay_us(300);
        //Set GO/DONE
        GO = 1;
 }
 
-void printADCData(){
+void printADCData(){ 
             int result = readADCData(); // Read data from ADC
             int resultInMeters = readADCMeter(); //Read data and convert to meters
-            latestReadMeterValue = resultInMeters;
-            if(1){ // Check LCD refresh rate and print to LCD
+            if(resultInMeters > 15 && resultInMeters < 150){
+                latestReadMeterValue = resultInMeters;
+            }  
+            if(updateLcdIRData){ // Check LCD refresh rate and print to LCD
+                updateLcdIRData = 0;
                 lcdSetCursor(0x00);
-                lcdWriteString("Raw:");
-                lcdWriteToDigitBCD(result,4,0);
-                lcdSetCursor(0x09);
-                lcdWriteString("=>");
+                //lcdWriteString("Raw:");
+                //lcdWriteToDigitBCD(result,4,0);
+                //lcdSetCursor(0x09);
+                //lcdWriteString("=>");
                 lcdWriteToDigitBCD(resultInMeters,3,0);
                 lcdWriteString("cm");
+                
             }
             // Restart the ADC conversion
             startADCConversion();    
