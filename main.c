@@ -131,7 +131,7 @@ void main (void){
                
         
         //Update the LCD with the distance travelled
-        //updateDistOnLCD();// LOOK! Freezes program if not connected to robot 
+        updateDistOnLCD();// LOOK! Freezes program if not connected to robot 
         
     }
     

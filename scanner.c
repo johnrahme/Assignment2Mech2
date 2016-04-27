@@ -48,6 +48,8 @@ char updateScanner(){
     return 0;                                                           //return 0(meaning sequence is incomplete)
     
 }
+
+//Ignore this for now, just a test that is not working
 void updateScannerOldWay(){
     
     //First rotate and store closes wall
