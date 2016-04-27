@@ -66,8 +66,8 @@ void debounceButtons(){
             pbCounter++; //Increment counter
             if(pbCounter >DEBOUNCE_REQ_COUNT &&pb0Released){
                 //Set flags
-                pb0Pressed = 1;
-                pb0Released = 0;
+                pb0Pressed = 1;                                 //Raise Pushbutton0 Pressed flag
+                pb0Released = 0;                                //Clear Pushbutton0 Released flag
             }
         }
         else{
