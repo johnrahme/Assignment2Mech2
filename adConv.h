@@ -9,6 +9,7 @@ int readADCData();
 int readADCMeter();
 void startADCConversion();
 void printADCData();
+int latestReadMeterValue = 0;
 
 
 #endif ADCONV_H

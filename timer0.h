@@ -28,6 +28,10 @@ volatile bit RTC_FLAG_MOVE_PATTERN = 0;
 volatile unsigned int RTC_MOVE_PATTERN_COUNTER = 0;
 volatile unsigned int MOVE_PATTERN_TIME = 0;
 
+volatile bit RTC_MOVE_SM_FLAG = 0;
+volatile unsigned char RTC_MOVE_SM_COUNTER = 0;
+volatile char SM_COUNTER_TIME = 30;
+       
 volatile bit RTC_FLAG_90DEG = 0;
 volatile unsigned int RTC_90DEG_COUNTER = 0;
 
@@ -40,5 +44,7 @@ void debounceButtons();
 void lcdRefresh();
 void flashLed();
 void updateMovePattern();
+void stepperMotorCounter();
+
 
 #endif TIMER0_H

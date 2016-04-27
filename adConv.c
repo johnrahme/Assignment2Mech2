@@ -56,8 +56,9 @@ void startADCConversion(){
 }
 
 void printADCData(){
-             int result = readADCData(); // Read data from ADC
+            int result = readADCData(); // Read data from ADC
             int resultInMeters = readADCMeter(); //Read data and convert to meters
+            latestReadMeterValue = resultInMeters;
             if(1){ // Check LCD refresh rate and print to LCD
                 lcdSetCursor(0x00);
                 lcdWriteString("Raw:");

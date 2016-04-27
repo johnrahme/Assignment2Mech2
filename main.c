@@ -15,6 +15,7 @@
 #include "SPI.h"
 #include "motor.h"
 #include "adConv.h"
+#include "scanner.h"
 
 #pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
 
@@ -38,6 +39,7 @@ void interrupt isr(void)
         updateMovePattern();
         //Debounce the buttons
         debounceButtons();
+        stepperMotorCounter();
         
         //moveMotorCont();
     }
@@ -78,7 +80,7 @@ void main (void){
     
     startADCConversion();
     while(1){
-        move(10,0);
+        //move(10,0);
         //Check ADC coversion
         if(conversionDone){ //Check conversion done flags
             conversionDone = 0; 
@@ -99,7 +101,11 @@ void main (void){
             patternDone = 0;
             pb1Pressed = 0;
         }
-        
+        if(pb2Pressed){
+            scanRunning = 1;
+            pb2Pressed = 0;
+        }
+        updateScanner();
               
             //If square pattern is not done update it
         if(!patternDone&&!squarePatternDone){

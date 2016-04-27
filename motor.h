@@ -17,7 +17,8 @@ signed int nrOfSteps = 0; //Stores total number of steps moved
 int halfSteps[] = {STEP0, STEP1, STEP2, STEP3, STEP4, STEP5, STEP6, STEP7}; //Array with half steps
 int wholeSteps[] = {STEP0, STEP2, STEP4, STEP6}; //Array with whole steps
 
-void move(char steps, char direction);
+void move(char direction);
+void moveOld(char steps, char direction);
 void moveDeg(double deg);
 void moveMotorCont(void);
 

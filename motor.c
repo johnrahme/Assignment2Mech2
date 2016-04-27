@@ -25,7 +25,7 @@ void initializeMotor(){
 }
 
 //Set the motor to move steps in a specific direction
-void move(char steps, char direction){
+void moveOld(char steps, char direction){
     if(direction == CLOCKWISE){
         // USes she SPI to set the motor to CW
         setToMotorCW();
@@ -39,17 +39,28 @@ void move(char steps, char direction){
         __delay_ms(SPEED);
    }
 }
+void move(char direction){
+    if(direction == CLOCKWISE){
+        // USes she SPI to set the motor to CW
+        setToMotorCW();
+    }
+    else if(direction == COUNTER_CLOCKWISE){
+        // USes she SPI to set the motor to CCW
+        setToMotorCCW();
+    }
+    SM_STEP();
+}
 
 //Move the specified degree using the degree per step
 void moveDeg(double deg){
     char stepsToMove;
     if(deg<0){
         stepsToMove = (char) round(-deg/(DEG_PER_STEP/2.0));
-        move(stepsToMove,0);
+        moveOld(stepsToMove,0);
     }
     else{
         stepsToMove = (char) round(deg/(DEG_PER_STEP/2.0)); 
-        move(stepsToMove,1);
+        moveOld(stepsToMove,1);
     }
 }
 

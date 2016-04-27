@@ -50,6 +50,15 @@ void updateMovePattern(){
 }
 
 
+void stepperMotorCounter(){
+    
+    RTC_MOVE_SM_COUNTER++;
+    if(RTC_MOVE_SM_COUNTER == SM_COUNTER_TIME){
+        RTC_MOVE_SM_FLAG = 1;
+        RTC_MOVE_SM_COUNTER = 0;
+    }
+}
+
 //Debounce buttons SB2, SB3, SB4 and SB5
 void debounceButtons(){
 
