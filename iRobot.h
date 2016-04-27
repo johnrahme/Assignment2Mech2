@@ -19,6 +19,7 @@
 #define		SONG_PLAYING            37			//indicates if a song is currently being played
 #define		PLAY_SONG		141			//play a song (0 - 15)
 #define		SONG			140			//define a song
+int distanceTraveled = 0;
 
 void setupIRobot(void);
 void drive(void);
@@ -26,6 +27,7 @@ void stop(void);
 char moveSquarePattern(void);
 void turnCW(void);
 int getTraveledDistance(void);
+void updateDistOnLCD(void);
 
 #endif	/* IROBOT_H */
 

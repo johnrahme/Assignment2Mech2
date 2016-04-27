@@ -48,6 +48,33 @@ char updateScanner(){
     return 0;                                                           //return 0(meaning sequence is incomplete)
     
 }
+void updateScannerOldWay(){
+    
+    //First rotate and store closes wall
+    for(int i = 0; i<400; i++){
+         move(0);
+        if(conversionDone){ //Check conversion done flags
+            conversionDone = 0; 
+            printADCData(); //Prints the conversion data to the LCD
+        }                                                        //move in direction 0(clockwise)
+        if(latestReadMeterValue < smallestDistance){                //if smallest recorded distance is greater than distance just read by scanner;
+                smallestDistance = latestReadMeterValue;                //last read distance becomes the new mallest distance read
+                smallestValueStep = scanStepNumber;                     //smallest step number changes accordingly to match distance just scanned
+        } 
+    }
+    scanStepNumber = 0;                                         //clear scanner step number
+    scanRunning = 0;                                            //clear scan running                                    //robot rotates to face wall
+    stepsFromOrigin = 0;
+    //Then rotate back
+    for(int i = 0; i<(400-smallestValueStep); i++){                                           //if scanner/stepper motor step number is less than the difference between steps required to move and the smallest stepper value
+            move(1);                                                    //move in direction 1(counter-clockwise))
+                                               //otherwise;
+            stepsFromOrigin = smallestValueStep;                                          //do not rotate scanner to face wall                                 //reset scanner/stepper motor step number value
+            smallestDistance = 20000;
+            smallestValueStep = 0;
+    }
+                                                        //return 0(meaning sequence is incomplete)    
+}
 //Just to move the motor back to its starting position
 void resetToOrigin(){
     moveOld(stepsFromOrigin,1);

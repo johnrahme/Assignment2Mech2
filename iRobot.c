@@ -1,6 +1,7 @@
 #include "common.h"
 #include "iRobot.h"
 #include "timer0.h"
+#include "lcd.h"
 
 char patternStage = 0;
 
@@ -122,5 +123,15 @@ int getTraveledDistance(){
     distance += ser_getch(); //Combine high bit with low bit 
     return distance;
 }
+
+void updateDistOnLCD(){
+    if(updateLcdDistData){
+        distanceTraveled += getTraveledDistance();
+        lcdSetCursor(0x40);
+        lcdWriteToDigitBCD(distanceTraveled, 4, 0);
+        updateLcdDistData = 0;
+    }
+}
+
 
 //-----SENSOR READINGS END-----

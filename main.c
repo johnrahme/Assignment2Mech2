@@ -68,7 +68,6 @@ void setup(void){
 
 void main (void){
     setup();
-    int distanceTraveled = 0;
     LED1 = 0;
     LED0 = 0;
     
@@ -132,9 +131,8 @@ void main (void){
                
         
         //Update the LCD with the distance travelled
-        //distanceTraveled += getTraveledDistance(); // Freezes program if not connected to robot 
-        //lcdSetCursor(0x40);
-        //lcdWriteToDigitBCD(distanceTraveled, 4, 0);
+        //updateDistOnLCD();// LOOK! Freezes program if not connected to robot 
+        
     }
     
 

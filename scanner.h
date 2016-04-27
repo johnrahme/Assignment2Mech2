@@ -12,8 +12,10 @@ int movingToWall = 0;
 int stepsFromOrigin = 0;
 
 char updateScanner();
+void updateScannerOldWay();
 void setScannerSpeed(char speed);
 void resetToOrigin();
+
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 
