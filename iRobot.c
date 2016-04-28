@@ -16,7 +16,6 @@ void setupIRobot(void){
 void drive(void){
     ser_putch(DRIVE); __delay_ms(5); ser_putch(0); __delay_ms(5); ser_putch(200); __delay_ms(5); ser_putch(127); __delay_ms(5); ser_putch(255);__delay_ms(5);
 }
-
 void turnAndDrive(int radius){
     char highByte = 0;
     char lowByte = 0;
@@ -32,7 +31,6 @@ void turnAndDrive(int radius){
     }
     ser_putch(DRIVE); __delay_ms(5); ser_putch(0); __delay_ms(5); ser_putch(200); __delay_ms(5); ser_putch(highByte); __delay_ms(5); ser_putch(lowByte);__delay_ms(5);
 }
-
 //Turn clockwise 
 void turnCW(){
     ser_putch(DRIVE); __delay_ms(5); ser_putch(0); __delay_ms(5); ser_putch(200); __delay_ms(5); ser_putch(255); __delay_ms(5); ser_putch(255);__delay_ms(5);
@@ -110,7 +108,6 @@ char followWallPattern(){
         RTC_FLAG_MOVE_PATTERN = 0;
     }
 }
-
 char moveTowardsWallPattern(int degree, int distance)
 {
     if(patternStage == 0){
