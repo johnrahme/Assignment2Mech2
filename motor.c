@@ -73,3 +73,8 @@ void moveMotorCont(void){
             time_count = 0;
      }
 }
+
+int stepToDegree(int steps){
+    int degrees = (int) round(steps*(DEG_PER_STEP/2.0)); 
+    return degrees;
+}

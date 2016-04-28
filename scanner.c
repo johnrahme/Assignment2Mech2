@@ -35,10 +35,12 @@ char updateScanner(){
         if(scanStepNumber<(stepsToMove-smallestValueStep)){             //if scanner/stepper motor step number is less than the difference between steps required to move and the smallest stepper value
             move(1);                                                    //move in direction 1(counter-clockwise))
         }
-        else{                                                    //otherwise;
+        else{                                                 //otherwise;
             stepsFromOrigin = smallestValueStep;
             movingToWall = 0;                                           //do not rotate scanner to face wall
             scanStepNumber = 0;                                    //reset scanner/stepper motor step number value
+            lastReadSmallestDistance = smallestDistance;
+            lastReadSmallestStepDegree = stepToDegree(smallestValueStep);
             smallestDistance = 20000;
             smallestValueStep = 0;
             return 1;                                                   //return 1(meaning sequence is complete)

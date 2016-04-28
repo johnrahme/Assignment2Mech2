@@ -21,5 +21,6 @@ void move(char direction);
 void moveOld(int steps, char direction);
 void moveDeg(double deg);
 void moveMotorCont(void);
+int stepToDegree(int steps);
 
 #endif MOTOR_H

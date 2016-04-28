@@ -26,8 +26,11 @@ void drive(void);
 void stop(void);
 char moveSquarePattern(void);
 void turnCW(void);
+void turnCCW(void);
+void turnDegreesCCW(int degrees);
 int getTraveledDistance(void);
 void updateDistOnLCD(void);
+char moveTowardsWallPattern(int degree, int distance);
 
 #endif	/* IROBOT_H */
 

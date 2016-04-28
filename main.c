@@ -77,6 +77,9 @@ void main (void){
     char patternDone = 1;
     char squarePatternDone = 1;
     char straightPatternDone = 1;
+    char moveToWallPatternDone = 1;
+    
+    
     
     startADCConversion();
     while(1){
@@ -98,11 +101,12 @@ void main (void){
         if(pb1Pressed){
             distanceTraveled = 0; //added in to 0 the total distance traveled at the start of the function
             straightPatternDone = 0;
+            //moveToWallPatternDone = 0;
             patternDone = 0;
             pb1Pressed = 0;
         }
         if(pb2Pressed){
-            setScannerSpeed(1);
+            setScannerSpeed(8);
             scanRunning = 1;
             //moveOld(100,0);
             //moveOld(100,0);
@@ -112,7 +116,12 @@ void main (void){
             resetToOrigin();
             pb3Pressed = 0;
         }
-        updateScanner();
+  
+        if(updateScanner()){
+            moveToWallPatternDone = 0;
+            patternDone = 0;
+            
+        }
               
             //If square pattern is not done update it
         if(!patternDone&&!squarePatternDone){
@@ -125,6 +134,11 @@ void main (void){
             //Square pattern function returns an a 0 if its not done and a 1 if it is done
             straightPatternDone = moveStraightPattern();
             patternDone = straightPatternDone;
+        }
+        if(!patternDone&&!moveToWallPatternDone){
+            //Square pattern function returns an a 0 if its not done and a 1 if it is done
+            moveToWallPatternDone = moveTowardsWallPattern(lastReadSmallestStepDegree,lastReadSmallestDistance-15);
+            patternDone = moveToWallPatternDone;
         }
         
         

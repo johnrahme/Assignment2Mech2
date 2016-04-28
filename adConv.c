@@ -59,7 +59,7 @@ void startADCConversion(){
 void printADCData(){ 
             int result = readADCData(); // Read data from ADC
             int resultInMeters = readADCMeter(); //Read data and convert to meters
-            if(resultInMeters > 15 && resultInMeters < 150){
+            if(resultInMeters > 15 && resultInMeters){
                 latestReadMeterValue = resultInMeters;
             }  
             if(updateLcdIRData){ // Check LCD refresh rate and print to LCD

@@ -10,6 +10,8 @@ int scanRunning = 0;
 int stepsToMove = 400;
 int movingToWall = 0;
 int stepsFromOrigin = 0;
+int lastReadSmallestDistance = 20000;
+int lastReadSmallestStepDegree = 0;
 
 char updateScanner();
 void updateScannerOldWay();
