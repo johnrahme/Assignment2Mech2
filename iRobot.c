@@ -2,6 +2,7 @@
 #include "iRobot.h"
 #include "timer0.h"
 #include "lcd.h"
+#include "adConv.h"
 
 char patternStage = 0;
 
@@ -15,8 +16,20 @@ void setupIRobot(void){
 void drive(void){
     ser_putch(DRIVE); __delay_ms(5); ser_putch(0); __delay_ms(5); ser_putch(200); __delay_ms(5); ser_putch(127); __delay_ms(5); ser_putch(255);__delay_ms(5);
 }
-void turnAndDrive(int turnAmmount){
-    ser_putch(DRIVE); __delay_ms(5); ser_putch(0); __delay_ms(5); ser_putch(200); __delay_ms(5); ser_putch(1); __delay_ms(5); ser_putch(500);__delay_ms(5);
+void turnAndDrive(int radius){
+    char highByte = 0;
+    char lowByte = 0;
+    if(radius <0){
+        highByte = -radius/256;
+        lowByte = -radius%256;
+        highByte = highByte ^ 0b11111111;
+        lowByte = lowByte ^ 0b11111111;
+    }
+    else{
+        highByte = radius/256;
+        lowByte = radius%256;
+    }
+    ser_putch(DRIVE); __delay_ms(5); ser_putch(0); __delay_ms(5); ser_putch(200); __delay_ms(5); ser_putch(highByte); __delay_ms(5); ser_putch(lowByte);__delay_ms(5);
 }
 //Turn clockwise 
 void turnCW(){
@@ -67,7 +80,33 @@ void turnDegreesCCW(int degrees){
 //-----MOVE PATTERNS START-----
 
 char followWallPattern(){
-    //To be implemented
+    if(patternStage == 0 && RTC_FLAG_MOVE_PATTERN){
+        RTC_MOVE_PATTERN_COUNTER = 0; 
+        MOVE_PATTERN_TIME = 300;
+        int valueOff = latestReadMeterValue-30;
+        valueOff*10; // Convert To millimeters
+        int radius = 0;
+        radius = 5000/valueOff;
+        
+        turnAndDrive(radius);
+        //increment pattern stage
+        patternStage++;
+        //Reset Pattern Flag
+        if(latestReadMeterValue != 0){
+            RTC_FLAG_MOVE_PATTERN = 0;
+        }
+        
+    }
+    if(patternStage == 1 && RTC_FLAG_MOVE_PATTERN){
+        LED0=1;
+        //Move forward 400 cm
+        moveDistanceForward(10);
+        //increment pattern stage
+        patternStage++;
+        //Reset Pattern Flag
+        patternStage = 0;
+        RTC_FLAG_MOVE_PATTERN = 0;
+    }
 }
 char moveTowardsWallPattern(int degree, int distance)
 {
@@ -86,8 +125,6 @@ char moveTowardsWallPattern(int degree, int distance)
             //Reset Pattern Flag
             RTC_FLAG_MOVE_PATTERN = 0;
         }
-        //Move forward 400 cm  
-        //increment pattern stage
         patternStage++;
     }
     if(patternStage == 2&&RTC_FLAG_MOVE_PATTERN){

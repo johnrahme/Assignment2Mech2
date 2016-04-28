@@ -28,6 +28,7 @@ char moveSquarePattern(void);
 void turnCW(void);
 void turnCCW(void);
 void turnDegreesCCW(int degrees);
+void turnAndDrive(int radius);
 int getTraveledDistance(void);
 void updateDistOnLCD(void);
 char moveTowardsWallPattern(int degree, int distance);

@@ -79,21 +79,27 @@ void main (void){
     char straightPatternDone = 1;
     char moveToWallPatternDone = 1;
     
+    char followWallPatternStart = 0;
     
     
     startADCConversion();
     while(1){
+        
         //move(10,0);
         //Check ADC coversion
         if(conversionDone){ //Check conversion done flags
             conversionDone = 0; 
             printADCData(); //Prints the conversion data to the LCD
         }
+        if(followWallPatternStart){
+            //followWallPattern();
+        }
         
         //Start the square pattern if PB0 is pressed
         if(pb0Pressed){
             distanceTraveled = 0; //added in to 0 the total distance traveled at the start of the function
-            squarePatternDone = 0;
+            followWallPatternStart = 1;
+            //squarePatternDone = 0;
             patternDone = 0;
             pb0Pressed = 0;
         }
@@ -145,7 +151,7 @@ void main (void){
                
         
         //Update the LCD with the distance travelled
-        updateDistOnLCD();// LOOK! Freezes program if not connected to robot 
+        //updateDistOnLCD();// LOOK! Freezes program if not connected to robot 
         
     }
     

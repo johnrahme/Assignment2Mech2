@@ -27,7 +27,7 @@ volatile unsigned char irLcdCounter = 0; //LCD counters
 
 volatile bit RTC_FLAG_MOVE_PATTERN = 0;
 volatile unsigned int RTC_MOVE_PATTERN_COUNTER = 0;
-volatile unsigned int MOVE_PATTERN_TIME = 0;
+volatile unsigned int MOVE_PATTERN_TIME = 1;
 
 volatile bit RTC_MOVE_SM_FLAG = 0;
 volatile unsigned char RTC_MOVE_SM_COUNTER = 0;
