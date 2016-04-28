@@ -15,6 +15,9 @@ void setupIRobot(void){
 void drive(void){
     ser_putch(DRIVE); __delay_ms(5); ser_putch(0); __delay_ms(5); ser_putch(200); __delay_ms(5); ser_putch(127); __delay_ms(5); ser_putch(255);__delay_ms(5);
 }
+void turnAndDrive(int turnAmmount){
+    ser_putch(DRIVE); __delay_ms(5); ser_putch(0); __delay_ms(5); ser_putch(200); __delay_ms(5); ser_putch(1); __delay_ms(5); ser_putch(500);__delay_ms(5);
+}
 //Turn clockwise 
 void turnCW(){
     ser_putch(DRIVE); __delay_ms(5); ser_putch(0); __delay_ms(5); ser_putch(200); __delay_ms(5); ser_putch(255); __delay_ms(5); ser_putch(255);__delay_ms(5);
@@ -63,6 +66,9 @@ void turnDegreesCCW(int degrees){
 }
 //-----MOVE PATTERNS START-----
 
+char followWallPattern(){
+    //To be implemented
+}
 char moveTowardsWallPattern(int degree, int distance)
 {
     if(patternStage == 0){

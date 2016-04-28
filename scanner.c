@@ -7,6 +7,20 @@
 void setScannerSpeed(char speed){
     SM_COUNTER_TIME = speed;
 }
+
+void checkClosestDistance(){
+    if(latestReadMeterValue < smallestDistance){                //if smallest recorded distance is greater than distance just read by scanner;
+        smallestDistance = latestReadMeterValue;                //last read distance becomes the new mallest distance read
+        smallestValueStep = scanStepNumber;                     //smallest step number changes accordingly to match distance just scanned
+    }
+}
+void resetScanner(){    
+    scanStepNumber = 0;                                    //reset scanner/stepper motor step number value
+    lastReadSmallestDistance = smallestDistance;
+    lastReadSmallestStepDegree = stepToDegree(smallestValueStep);
+    smallestDistance = 20000;
+    smallestValueStep = 0;
+}
 char updateScanner(){
     
     //First rotate and store closes wall
@@ -15,10 +29,7 @@ char updateScanner(){
         if(scanStepNumber < stepsToMove){                               //if scanner step number is less than steps to move
             scanStepNumber++;                                        //increment scanner step number
             move(0);                                                    //move in direction 0(clockwise)
-            if(latestReadMeterValue < smallestDistance){                //if smallest recorded distance is greater than distance just read by scanner;
-                smallestDistance = latestReadMeterValue;                //last read distance becomes the new mallest distance read
-                smallestValueStep = scanStepNumber;                     //smallest step number changes accordingly to match distance just scanned
-            }
+            checkClosestDistance();
         }
         else{                                                           //otherwise;
             scanStepNumber = 0;                                         //clear scanner step number
@@ -35,14 +46,10 @@ char updateScanner(){
         if(scanStepNumber<(stepsToMove-smallestValueStep)){             //if scanner/stepper motor step number is less than the difference between steps required to move and the smallest stepper value
             move(1);                                                    //move in direction 1(counter-clockwise))
         }
-        else{                                                 //otherwise;
-            stepsFromOrigin = smallestValueStep;
+        else{                                              //otherwise;
             movingToWall = 0;                                           //do not rotate scanner to face wall
-            scanStepNumber = 0;                                    //reset scanner/stepper motor step number value
-            lastReadSmallestDistance = smallestDistance;
-            lastReadSmallestStepDegree = stepToDegree(smallestValueStep);
-            smallestDistance = 20000;
-            smallestValueStep = 0;
+            stepsFromOrigin = smallestValueStep;
+            resetScanner();
             return 1;                                                   //return 1(meaning sequence is complete)
         }
     }
