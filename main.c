@@ -62,8 +62,8 @@ void setup(void){
     
     //Set SPI to motor
     setToMotorCW();
-    initializeADC();
     setupLCD();//THIS MIGHT FK UP THE ROBOT FROM MOVING DONT KNOW YET, GOTTA TRY IT
+    initializeADC();
 }
 
 void main (void){
@@ -92,7 +92,7 @@ void main (void){
             printADCData(); //Prints the conversion data to the LCD
         }
         if(followWallPatternStart){
-            //followWallPattern();
+            followWallPattern();
         }
         
         //Start the square pattern if PB0 is pressed

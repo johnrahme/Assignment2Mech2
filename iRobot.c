@@ -82,11 +82,11 @@ void turnDegreesCCW(int degrees){
 char followWallPattern(){
     if(patternStage == 0 && RTC_FLAG_MOVE_PATTERN){
         RTC_MOVE_PATTERN_COUNTER = 0; 
-        MOVE_PATTERN_TIME = 300;
+        MOVE_PATTERN_TIME = 50;
         int valueOff = latestReadMeterValue-30;
         valueOff*10; // Convert To millimeters
         int radius = 0;
-        radius = 5000/valueOff;
+        radius = 500/valueOff;
         
         turnAndDrive(radius);
         //increment pattern stage

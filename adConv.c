@@ -16,7 +16,7 @@ void initializeADC(){
     PCFG3 = 0;
     PCFG2 = 0;
     PCFG1 = 1;
-    PCFG0 = 1;
+    PCFG0 = 0;
     
     ADCON0 = 0b10000001;
     
@@ -39,8 +39,8 @@ int readADCData(){
 int readADCMeter(){
     int raw = readADCData();
     double rawInverted =  1.0/((double) raw);
-    //For 4.0
-    double k = 15015;
+    //For 5 .0
+    double k = 12282;
     //For 3.3 volt
     //double k = 18609; 
     double m = -1.6803;
