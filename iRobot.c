@@ -83,29 +83,17 @@ char followWallPattern(){
     if(patternStage == 0 && RTC_FLAG_MOVE_PATTERN){
         RTC_MOVE_PATTERN_COUNTER = 0; 
         MOVE_PATTERN_TIME = 50;
-        int valueOff = latestReadMeterValue-30;
+        int valueOff = latestReadMeterValue-40;
         valueOff*10; // Convert To millimeters
         int radius = 0;
-        radius = 500/valueOff;
+        radius = 10000/valueOff;
         
         turnAndDrive(radius);
         //increment pattern stage
-        patternStage++;
+        //patternStage++;
         //Reset Pattern Flag
-        if(latestReadMeterValue != 0){
-            RTC_FLAG_MOVE_PATTERN = 0;
-        }
-        
-    }
-    if(patternStage == 1 && RTC_FLAG_MOVE_PATTERN){
-        LED0=1;
-        //Move forward 400 cm
-        moveDistanceForward(10);
-        //increment pattern stage
-        patternStage++;
-        //Reset Pattern Flag
-        patternStage = 0;
         RTC_FLAG_MOVE_PATTERN = 0;
+        
     }
 }
 char moveTowardsWallPattern(int degree, int distance)

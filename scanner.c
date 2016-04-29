@@ -91,3 +91,6 @@ void resetToOrigin(){
     moveOld(stepsFromOrigin,1);
     stepsFromOrigin = 0;
 }
+void resetSensorToWallFollow(){
+    
+}

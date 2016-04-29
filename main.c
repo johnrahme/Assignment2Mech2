@@ -145,6 +145,9 @@ void main (void){
             //Square pattern function returns an a 0 if its not done and a 1 if it is done
             moveToWallPatternDone = moveTowardsWallPattern(lastReadSmallestStepDegree,lastReadSmallestDistance-15);
             patternDone = moveToWallPatternDone;
+            if(moveToWallPatternDone){
+                followWallPatternStart = 1;
+            }
         }
         
         
