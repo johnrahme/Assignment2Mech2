@@ -7,7 +7,6 @@
 
 
 #include <xc.h>
-#include <math.h>
 #include "motor.h"
 #include "lcd.h"
 #include "SPI.h"
@@ -55,11 +54,11 @@ void move(char direction){
 void moveDeg(double deg){
     char stepsToMove;
     if(deg<0){
-        stepsToMove = (char) round(-deg/(DEG_PER_STEP/2.0));
+        stepsToMove = (char) (-deg/(DEG_PER_STEP/2.0));
         moveOld(stepsToMove,0);
     }
     else{
-        stepsToMove = (char) round(deg/(DEG_PER_STEP/2.0)); 
+        stepsToMove = (char) (deg/(DEG_PER_STEP/2.0)); 
         moveOld(stepsToMove,1);
     }
 }

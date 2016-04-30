@@ -23,7 +23,7 @@ void stopAllPatterns() {
 void updatePatterns() {
 
     if (followWallPatternStart) {
-        followWallPattern();
+        followWallPatternV2();
     }
  
     if (updateScanner()&&!onlyScan) {

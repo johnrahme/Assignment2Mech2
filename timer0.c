@@ -48,6 +48,11 @@ void updateMovePattern(){
             RTC_FLAG_MOVE_PATTERN = 1;
             RTC_MOVE_PATTERN_COUNTER = 0;
       }
+    RTC_LOST_WALL_COUNTER++;
+    if(RTC_LOST_WALL_COUNTER == LOST_WALL_TIME){
+        RTC_LOST_WALL_FLAG = 1;
+        RTC_LOST_WALL_COUNTER = 0;
+    }
 }
 
 

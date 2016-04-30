@@ -34,7 +34,14 @@ int getTraveledDistance(void);
 void updateSensors(void);
 char moveTowardsWallPattern(int degree, int distance);
 void turnAndDriveDirect(int rightVelocity, int leftVelocity);
+
+char followWallPattern();
+char followWallPatternV2();
+
 char patternStage = 0;
+int valueOffWall = 0;
+char activateLostWall = 0;
+char lostWallCounter = 0;
 
 #endif	/* IROBOT_H */
 

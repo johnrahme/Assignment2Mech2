@@ -39,6 +39,10 @@ volatile unsigned int RTC_90DEG_COUNTER = 0;
 volatile bit RTC_FLAG_20000MS = 0;
 volatile unsigned int RTC_20000MS_COUNTER = 0;
 
+volatile bit RTC_LOST_WALL_FLAG = 0;
+volatile unsigned int RTC_LOST_WALL_COUNTER = 0;
+volatile unsigned int LOST_WALL_TIME = 0;
+
 
 void initializeTimer0();
 void debounceButtons();
