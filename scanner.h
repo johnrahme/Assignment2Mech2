@@ -13,10 +13,13 @@ int stepsFromOrigin = 0;
 int lastReadSmallestDistance = 20000;
 int lastReadSmallestStepDegree = 0;
 
+char resetSensorToWallFollowFlag = 0;
+
 char updateScanner();
 void updateScannerOldWay();
 void setScannerSpeed(char speed);
 void resetToOrigin();
+void resetSensorToWallFollow();
 
 
 #endif	/* XC_HEADER_TEMPLATE_H */
