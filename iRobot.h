@@ -39,9 +39,11 @@ char followWallPattern();
 char followWallPatternV2();
 
 char patternStage = 0;
-int valueOffWall = 0;
+int lastValueOff = 0;
 char activateLostWall = 0;
 char lostWallCounter = 0;
+
+bit boostActivated = 0;
 
 #endif	/* IROBOT_H */
 

@@ -108,22 +108,47 @@ char followWallPatternV2(){
         RTC_MOVE_PATTERN_COUNTER = 0; 
         MOVE_PATTERN_TIME = 10; //How often to update
         int valueOff = latestReadMeterValue-50;
+        lastValueOff = valueOff;
         valueOff*10; // Convert To millimeters
         int speedRightWheel = 0;
         int speedLeftWheel = 0;
         char divideBy = 1;
         char times = 1;
         
-        if((valueOff>100)){  
+        if((valueOff>100)){
             divideBy = 10;
         }
-        else if(valueOff<-20){
+        else if(valueOff<-5){
             times = 15;
+        }
+        if(boostActivated&&valueOff>30){
+            times = times*20;
         }
          speedRightWheel = 200+valueOff/divideBy*times;
          speedLeftWheel = 200-valueOff/divideBy*times;
         
-
+         //Check if it lost the wall
+        if(lastValueOff < 20 && valueOff > 80 && !activateLostWall){
+            activateLostWall = 1;
+            RTC_LOST_WALL_FLAG = 0;
+            RTC_LOST_WALL_COUNTER = 0;
+            LOST_WALL_TIME = 5000;
+        }
+        //If the lost wall timer is done, turn fast
+        if(RTC_LOST_WALL_FLAG&&activateLostWall){
+            LED0 = !LED0;
+            RTC_LOST_WALL_FLAG = 0;
+           if(lostWallCounter == 0){
+               lostWallCounter++;
+               boostActivated = 1;
+           }
+           else{
+               activateLostWall = 0;
+               boostActivated = 0;
+               lostWallCounter = 0;
+           }       
+        }
+         
         turnAndDriveDirect(speedRightWheel,speedLeftWheel);
         //Do not increment patternStage since we want this function to run forever
         //patternStage++;
