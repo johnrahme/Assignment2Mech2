@@ -16,6 +16,22 @@ void checkClosestDistance() {
 }
 
 void resetScanner() {
+    LED0 = !LED0;
+    smallestDistance = 20000;
+    scanStepNumber = 0;
+    smallestValueStep = 0;
+    scanRunning = 0;
+    stepsToMove = 400;
+    movingToWall = 0;
+    lastReadSmallestDistance = 20000;
+    lastReadSmallestStepDegree = 0;
+
+    resetSensorToWallFollowFlag = 0;
+    resetToOrigin();
+    stepsFromOrigin = 0;
+}
+
+void updateScannerBuffer() {
     scanStepNumber = 0; //reset scanner/stepper motor step number value
     lastReadSmallestDistance = smallestDistance;
     lastReadSmallestStepDegree = stepToDegree(smallestValueStep);
@@ -49,7 +65,9 @@ char updateScanner() {
         } else { //otherwise;
             movingToWall = 0; //do not rotate scanner to face wall
             stepsFromOrigin = smallestValueStep;
-            resetScanner();
+            lcdSetCursor(0x07);
+            lcdWriteToDigitBCD(stepsFromOrigin,3,1);
+            updateScannerBuffer();
             return 1; //return 1(meaning sequence is complete)
         }
     }
@@ -67,22 +85,20 @@ void resetToOrigin() {
 void resetSensorToWallFollow() {
     if (RTC_MOVE_SM_FLAG && resetSensorToWallFollowFlag) {
         RTC_MOVE_SM_FLAG = 0;
-        stepsToMove = 55-stepsFromOrigin;
+        stepsToMove = WALL_FOLLOW_ANGLE - stepsFromOrigin;
         char direction = 0;
-        if(stepsToMove < 0){
+        if (stepsToMove < 0) {
             stepsToMove *= -1;
             direction = 1;
         }
         if (scanStepNumber < stepsToMove) { //if scanner step number is less than steps to move
             scanStepNumber++; //increment scanner step number
             move(direction); //move in direction 0(clockwise)
-        }
-        
-        else { //otherwise;
-            scanStepNumber = 0; 
-            stepsFromOrigin = 45;
+        } else { //otherwise;
+            stepsFromOrigin = WALL_FOLLOW_ANGLE;
+            scanStepNumber = 0;
             resetSensorToWallFollowFlag = 0;
         }
-        
+
     }
- }
+}

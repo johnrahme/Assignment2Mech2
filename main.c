@@ -15,6 +15,7 @@
 #include "SPI.h"
 #include "motor.h"
 #include "adConv.h"
+#include "patternHandler.h"
 #include "scanner.h"
 
 #pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
@@ -71,38 +72,24 @@ void main (void){
     LED1 = 0;
     LED0 = 0;
     
-    //lcdSetCursor(0x40);
-    //lcdWriteString("I am iRobot!");
-    
-    char patternDone = 1;
-    char squarePatternDone = 1;
-    char straightPatternDone = 1;
-    char moveToWallPatternDone = 1;
-    
-    char followWallPatternStart = 0;
-    
-    //Check if the robot should scan for closest wall or scan and move to closest wall
-    char onlyScan = 1;
     
     startADCConversion();
     while(1){
-        
+        lcdSetCursor(0x40);
+        lcdWriteToDigitBCD(stepsFromOrigin,3,1);
         //move(10,0);
         //Check ADC coversion
         if(conversionDone){ //Check conversion done flags
             conversionDone = 0; 
             printADCData(); //Prints the conversion data to the LCD
         }
-        if(followWallPatternStart){
-            followWallPattern();
-        }
         
         //Start the square pattern if PB0 is pressed
         if(pb0Pressed){
-            distanceTraveled = 0; //added in to 0 the total distance traveled at the start of the function
-            
-            squarePatternDone = 0;
-            patternDone = 0;
+            //distanceTraveled = 0; //added in to 0 the total distance traveled at the start of the function 
+            //squarePatternDone = 0;
+            //patternDone = 0;
+            stopAllPatterns();
             pb0Pressed = 0;
         }
         
@@ -126,42 +113,13 @@ void main (void){
             distanceTraveled = 0;
             onlyScan = 0;
             pb3Pressed = 0;
-        }
-  
-        if(updateScanner()&&!onlyScan){
-            moveToWallPatternDone = 0;
-            resetSensorToWallFollowFlag = 1;
-            patternDone = 0;
-            
-        }
-        //Check if the sensor should reset
-        resetSensorToWallFollow();    
-            //If square pattern is not done update it
-        if(!patternDone&&!squarePatternDone){
-            //Square pattern function returns an a 0 if its not done and a 1 if it is done
-            
-            squarePatternDone = moveSquarePattern();
-            patternDone = squarePatternDone;
-        }
-        if(!patternDone&&!straightPatternDone){
-            //Square pattern function returns an a 0 if its not done and a 1 if it is done
-            straightPatternDone = moveStraightPattern();
-            patternDone = straightPatternDone;
-        }
-        if(!patternDone&&!moveToWallPatternDone){
-            //Square pattern function returns an a 0 if its not done and a 1 if it is done
-            moveToWallPatternDone = moveTowardsWallPattern(lastReadSmallestStepDegree,lastReadSmallestDistance-25);
-            patternDone = moveToWallPatternDone;
-            if(moveToWallPatternDone){
-                followWallPatternStart = 1;
-            }
-        }
+        }     
         
-        
-               
+        //Use patternHandler to update the patterns
+        updatePatterns();
         
         //Update the LCD with the distance travelled
-        updateDistOnLCD();// LOOK! Freezes program if not connected to robot 
+        //updateDistOnLCD();// LOOK! Freezes program if not connected to robot 
         
     }
     

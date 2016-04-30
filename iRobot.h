@@ -32,6 +32,7 @@ void turnAndDrive(int radius);
 int getTraveledDistance(void);
 void updateDistOnLCD(void);
 char moveTowardsWallPattern(int degree, int distance);
+char patternStage = 0;
 
 #endif	/* IROBOT_H */
 

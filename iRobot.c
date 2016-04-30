@@ -3,8 +3,7 @@
 #include "timer0.h"
 #include "lcd.h"
 #include "adConv.h"
-
-char patternStage = 0;
+#include "patternHandler.h"
 
 void setupIRobot(void){
     ser_putch(START); //start create robot
@@ -213,9 +212,27 @@ int getTraveledDistance(){
     distance += ser_getch(); //Combine high bit with low bit 
     return distance;
 }
+char getBumpDropSensor(){
+    char bumpSensor = 0;
+    ser_putch(142); //Set to read sensors
+    __delay_ms(5);
+    ser_putch(7); //Set drive packet ID
+    __delay_ms(5);
+    bumpSensor = ser_getch();
+    return bumpSensor;
+}
 
+void updateBumpDropSensor(){
+    char bumpSensor = getBumpDropSensor();
+    char stopMovement = bumpSensor&0b00011111;
+    if(stopMovement){
+        stopAllPatterns();
+    }
+}
 void updateDistOnLCD(){
     if(updateLcdDistData){
+        //Check bumpCliffSensors
+        updateBumpDropSensor();
         distanceTraveled += getTraveledDistance();
         lcdSetCursor(0x40);
         lcdWriteToDigitBCD(distanceTraveled, 4, 0);

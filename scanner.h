@@ -1,8 +1,10 @@
 
-#ifndef XC_HEADER_TEMPLATE_H
-#define	XC_HEADER_TEMPLATE_H
+#ifndef SCANNER_H
+#define	SCANNER_H
 
 #include "common.h"
+
+#define WALL_FOLLOW_ANGLE 55
 int smallestDistance = 20000;
 int scanStepNumber = 0;
 int smallestValueStep = 0;
@@ -21,6 +23,8 @@ void setScannerSpeed(char speed);
 void resetToOrigin();
 void resetSensorToWallFollow();
 
+void resetScanner();
 
-#endif	/* XC_HEADER_TEMPLATE_H */
+
+#endif	/* SCANNER_H */
 
