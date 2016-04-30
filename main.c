@@ -85,10 +85,10 @@ void main (void){
         //Start the square pattern if PB0 is pressed
         if(pb0Pressed){
             distanceTraveled = 0; //added in to 0 the total distance traveled at the start of the function 
-            //squarePatternDone = 0;
-            followWallPatternStart = 1;
+            squarePatternDone = 0;
+            //followWallPatternStart = 1;
             //turnAndDriveDirect(100,200);
-            //patternDone = 0;
+            patternDone = 0;
             pb0Pressed = 0;
         }
         
