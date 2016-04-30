@@ -118,7 +118,7 @@ void main (void){
         updatePatterns();
         
         //Update the LCD with the distance travelled and check bumper sensors
-        updateSensors();// LOOK! Freezes program if not connected to robot 
+        //updateSensors();// LOOK! Freezes program if not connected to robot 
         
     }
     

@@ -53,6 +53,12 @@ void updatePatterns() {
             followWallPatternStart = 1;
         }
     }
+    
+    
+    if(!scanRunning&&!movingToWall){
+        //Update the LCD with the distance travelled and check bumper sensors
+        updateSensors();// LOOK! Freezes program if not connected to robot
+    }
     //Check if it should reset the sensor
     resetSensorToWallFollow();
 }
