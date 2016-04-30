@@ -107,17 +107,17 @@ char followWallPatternV2(){
     if(patternStage == 0 && RTC_FLAG_MOVE_PATTERN){
         RTC_MOVE_PATTERN_COUNTER = 0; 
         MOVE_PATTERN_TIME = 10; //How often to update
-        int valueOff = latestReadMeterValue-40;
+        int valueOff = latestReadMeterValue-50;
         valueOff*10; // Convert To millimeters
         int speedRightWheel = 0;
         int speedLeftWheel = 0;
         char divideBy = 1;
         char times = 1;
         
-        if((valueOff>50)){  
+        if((valueOff>100)){  
             divideBy = 10;
         }
-        if(valueOff<-5){
+        else if(valueOff<-20){
             times = 15;
         }
          speedRightWheel = 200+valueOff/divideBy*times;
