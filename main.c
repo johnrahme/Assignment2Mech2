@@ -35,7 +35,7 @@ void interrupt isr(void)
         TMR0IF = 0;
         TMR0 = TMR0_VAL;
         //User timer0 source function to flash a led
-        //flashLed();
+        flashLed();
         //Increment counter for the current pattern
         updateMovePattern();
         //Debounce the buttons
@@ -74,9 +74,7 @@ void main (void){
     
     
     startADCConversion();
-    while(1){
-        lcdSetCursor(0x40);
-        lcdWriteToDigitBCD(stepsFromOrigin,3,1);
+    while(1){   
         //move(10,0);
         //Check ADC coversion
         if(conversionDone){ //Check conversion done flags
@@ -86,23 +84,22 @@ void main (void){
         
         //Start the square pattern if PB0 is pressed
         if(pb0Pressed){
-            //distanceTraveled = 0; //added in to 0 the total distance traveled at the start of the function 
-            //squarePatternDone = 0;
-            //patternDone = 0;
-            stopAllPatterns();
+            distanceTraveled = 0; //added in to 0 the total distance traveled at the start of the function 
+            squarePatternDone = 0;
+            patternDone = 0;
             pb0Pressed = 0;
         }
         
         if(pb1Pressed){
             distanceTraveled = 0; //added in to 0 the total distance traveled at the start of the function
             straightPatternDone = 0;
-            //moveToWallPatternDone = 0;
             patternDone = 0;
             pb1Pressed = 0;
         }
         if(pb2Pressed){
             setScannerSpeed(8);
             scanRunning = 1;
+            onlyScan = 1;
             //moveOld(100,0);
             //moveOld(100,0);
             pb2Pressed = 0;
@@ -118,8 +115,8 @@ void main (void){
         //Use patternHandler to update the patterns
         updatePatterns();
         
-        //Update the LCD with the distance travelled
-        //updateDistOnLCD();// LOOK! Freezes program if not connected to robot 
+        //Update the LCD with the distance travelled and check bumper sensors
+        updateSensors();// LOOK! Freezes program if not connected to robot 
         
     }
     

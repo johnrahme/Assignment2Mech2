@@ -19,6 +19,7 @@
 #define		SONG_PLAYING            37			//indicates if a song is currently being played
 #define		PLAY_SONG		141			//play a song (0 - 15)
 #define		SONG			140			//define a song
+#define     DRIVE_DIRECT    145         //Set drive direct
 int distanceTraveled = 0;
 
 void setupIRobot(void);
@@ -30,8 +31,9 @@ void turnCCW(void);
 void turnDegreesCCW(int degrees);
 void turnAndDrive(int radius);
 int getTraveledDistance(void);
-void updateDistOnLCD(void);
+void updateSensors(void);
 char moveTowardsWallPattern(int degree, int distance);
+void turnAndDriveDirect(int rightVelocity, int leftVelocity);
 char patternStage = 0;
 
 #endif	/* IROBOT_H */

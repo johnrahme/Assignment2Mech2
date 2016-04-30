@@ -16,7 +16,6 @@ void checkClosestDistance() {
 }
 
 void resetScanner() {
-    LED0 = !LED0;
     smallestDistance = 20000;
     scanStepNumber = 0;
     smallestValueStep = 0;
@@ -65,8 +64,6 @@ char updateScanner() {
         } else { //otherwise;
             movingToWall = 0; //do not rotate scanner to face wall
             stepsFromOrigin = smallestValueStep;
-            lcdSetCursor(0x07);
-            lcdWriteToDigitBCD(stepsFromOrigin,3,1);
             updateScannerBuffer();
             return 1; //return 1(meaning sequence is complete)
         }

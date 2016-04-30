@@ -22,7 +22,7 @@ volatile bit pb3Released = 0;
 volatile unsigned char pbCounter4 = 0;
 
 volatile bit updateLcdIRData = 0; //Update refresh bit flag
-volatile bit updateLcdDistData = 0;
+volatile bit updateSensorsFlag = 0;
 volatile unsigned char irLcdCounter = 0; //LCD counters
 
 volatile bit RTC_FLAG_MOVE_PATTERN = 0;

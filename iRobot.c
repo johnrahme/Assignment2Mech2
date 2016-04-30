@@ -11,9 +11,41 @@ void setupIRobot(void){
     ser_putch(FULL);
     __delay_ms(5);
 }
+
 //Drive straight forward
 void drive(void){
     ser_putch(DRIVE); __delay_ms(5); ser_putch(0); __delay_ms(5); ser_putch(200); __delay_ms(5); ser_putch(127); __delay_ms(5); ser_putch(255);__delay_ms(5);
+}
+//This function sets the wheel speeds independently
+void turnAndDriveDirect(int rightVelocity, int leftVelocity){
+    char highByteR = 0;
+    char lowByteR = 0;
+    
+    char highByteL = 0;
+    char lowByteL = 0;
+    //Sets speed of Right Wheel
+    if(rightVelocity <0){
+        highByteR = -rightVelocity/256;
+        lowByteR = -rightVelocity%256;
+        highByteR = highByteR ^ 0b11111111;
+        lowByteR = lowByteR ^ 0b11111111;
+    }
+    else{
+        highByteR = rightVelocity/256;
+        lowByteR = rightVelocity%256;
+    }
+    //Sets speed of left Wheel
+    if(rightVelocity <0){
+        highByteL = -leftVelocity/256;
+        lowByteL = -leftVelocity%256;
+        highByteL = highByteL ^ 0b11111111;
+        lowByteL = lowByteL ^ 0b11111111;
+    }
+    else{
+        highByteL = leftVelocity/256;
+        lowByteL = leftVelocity%256;
+    }
+    ser_putch(DRIVE_DIRECT); __delay_ms(5); ser_putch(highByteR); __delay_ms(5); ser_putch(lowByteR); __delay_ms(5); ser_putch(highByteL); __delay_ms(5); ser_putch(lowByteL);__delay_ms(5);
 }
 void turnAndDrive(int radius){
     char highByte = 0;
@@ -49,8 +81,6 @@ void moveDistanceForward(int centimeters){
     //Set the time for the counter to wait until next step in pattern
     MOVE_PATTERN_TIME = totalTimeToMove;
     drive();
-    LED0 = 0;
-    LED1 = 1;
 }
 void turnDegreesCW(int degrees){
     RTC_MOVE_PATTERN_COUNTER = 0; //Reset the counter
@@ -60,8 +90,6 @@ void turnDegreesCW(int degrees){
     //Set the time for the counter to wait until next step in pattern
     MOVE_PATTERN_TIME = totalTimeToTurn;
     turnCW();
-    LED0 = 1;
-    LED1 = 0;
     
 }
 void turnDegreesCCW(int degrees){
@@ -72,14 +100,12 @@ void turnDegreesCCW(int degrees){
     //Set the time for the counter to wait until next step in pattern
     MOVE_PATTERN_TIME = totalTimeToTurn;
     turnCCW();
-    LED0 = 1;
-    LED1 = 0;
     
 }
 //-----MOVE PATTERNS START-----
 
 char followWallPattern(){
-    if(patternStage == 0 && RTC_FLAG_MOVE_PATTERN){
+    if(patternStage == 0){
         RTC_MOVE_PATTERN_COUNTER = 0; 
         MOVE_PATTERN_TIME = 20;
         int valueOff = latestReadMeterValue-50;
@@ -89,16 +115,28 @@ char followWallPattern(){
         
         turnAndDrive(radius);
         //increment pattern stage
+        patternStage++;
+        //Reset Pattern Flag
+        RTC_FLAG_MOVE_PATTERN = 0;
+    }
+    else if(patternStage == 1 && RTC_FLAG_MOVE_PATTERN){
+        RTC_MOVE_PATTERN_COUNTER = 0; 
+        MOVE_PATTERN_TIME = 20;
+        int valueOff = latestReadMeterValue-50;
+        valueOff*10; // Convert To millimeters
+        int radius = 0;
+        radius = 20000/valueOff;
+        
+        turnAndDrive(radius);
+        //Do not increment since we want this function to run forever
         //patternStage++;
         //Reset Pattern Flag
         RTC_FLAG_MOVE_PATTERN = 0;
-        
     }
 }
 char moveTowardsWallPattern(int degree, int distance)
 {
     if(patternStage == 0){
-        LED0=1;
         //Move forward 400 cm
         turnDegreesCCW(degree);
         //increment pattern stage
@@ -129,8 +167,6 @@ char moveTowardsWallPattern(int degree, int distance)
         patternStage = 0;
         RTC_FLAG_MOVE_PATTERN = 0;
         
-        LED0 = 0;
-        LED1 = 0;
         // Return 1 to show that pattern is over
         return 1;
     }
@@ -155,8 +191,7 @@ char moveStraightPattern()
         patternStage = 0;
         RTC_FLAG_MOVE_PATTERN = 0;
         
-        LED0 = 0;
-        LED1 = 0;
+
         // Return 1 to show that pattern is over
         return 1;
     }
@@ -189,8 +224,6 @@ char moveSquarePattern(){
         patternStage = 0;
         RTC_FLAG_MOVE_PATTERN = 0;
         
-        LED0 = 0;
-        LED1 = 0;
         // Return 1 to show that pattern is over
         return 1;
     }
@@ -229,14 +262,15 @@ void updateBumpDropSensor(){
         stopAllPatterns();
     }
 }
-void updateDistOnLCD(){
-    if(updateLcdDistData){
+void updateSensors(){
+    if(updateSensorsFlag){
         //Check bumpCliffSensors
         updateBumpDropSensor();
+        //Update and write distance travelled
         distanceTraveled += getTraveledDistance();
         lcdSetCursor(0x40);
         lcdWriteToDigitBCD(distanceTraveled, 4, 0);
-        updateLcdDistData = 0;
+        updateSensorsFlag = 0;
     }
 }
 

@@ -25,7 +25,7 @@ void lcdRefresh(){
     irLcdCounter++;
     if(irLcdCounter==LCD_REFRESH_RATE){
         updateLcdIRData = 1;
-        updateLcdDistData = 1;
+        updateSensorsFlag = 1;
         irLcdCounter = 0;
     }
     
