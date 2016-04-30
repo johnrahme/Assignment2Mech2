@@ -103,6 +103,34 @@ void turnDegreesCCW(int degrees){
     
 }
 //-----MOVE PATTERNS START-----
+char followWallPatternV2(){
+    if(patternStage == 0 && RTC_FLAG_MOVE_PATTERN){
+        RTC_MOVE_PATTERN_COUNTER = 0; 
+        MOVE_PATTERN_TIME = 10; //How often to update
+        int valueOff = latestReadMeterValue-40;
+        valueOff*10; // Convert To millimeters
+        int speedRightWheel = 0;
+        int speedLeftWheel = 0;
+        char divideBy = 1;
+        char times = 1;
+        
+        if((valueOff>50)){  
+            divideBy = 10;
+        }
+        if(valueOff<-5){
+            times = 15;
+        }
+         speedRightWheel = 200+valueOff/divideBy*times;
+         speedLeftWheel = 200-valueOff/divideBy*times;
+        
+
+        turnAndDriveDirect(speedRightWheel,speedLeftWheel);
+        //Do not increment patternStage since we want this function to run forever
+        //patternStage++;
+        //Reset Pattern Flag
+        RTC_FLAG_MOVE_PATTERN = 0;
+    }
+}
 
 char followWallPattern(){
     if(patternStage == 0){
@@ -128,7 +156,7 @@ char followWallPattern(){
         radius = 20000/valueOff;
         
         turnAndDrive(radius);
-        //Do not increment since we want this function to run forever
+        //Do not increment patternStage since we want this function to run forever
         //patternStage++;
         //Reset Pattern Flag
         RTC_FLAG_MOVE_PATTERN = 0;
