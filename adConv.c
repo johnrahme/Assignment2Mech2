@@ -1,8 +1,4 @@
-#include <xc.h>
 #include "adConv.h"
-#include <math.h>
-#include "lcd.h"
-#include "timer0.h"
 
 void initializeADC(){
     //Set output on PORT A

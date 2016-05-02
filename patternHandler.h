@@ -3,6 +3,9 @@
 #define	XC_HEADER_TEMPLATE_H
 
 #include "common.h"
+#include "scanner.h"
+#include "iRobot.h"
+
 char patternDone = 1;
 char squarePatternDone = 1;
 char straightPatternDone = 1;

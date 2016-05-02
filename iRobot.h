@@ -8,7 +8,12 @@
 #ifndef IROBOT_H
 #define	IROBOT_H
 
+#include "common.h"
 #include "ser.h"
+#include "timer0.h"
+#include "lcd.h"
+#include "adConv.h"
+#include "patternHandler.h"
 
 #define		START                   128			//Create start command
 #define		FULL			132			//Create full control command

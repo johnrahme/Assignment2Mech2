@@ -1,8 +1,4 @@
 #include "scanner.h"
-#include "motor.h"
-#include "adConv.h"
-#include "timer0.h"
-#include "lcd.h"
 
 void setScannerSpeed(char speed) {
     SM_COUNTER_TIME = speed;

@@ -10,12 +10,7 @@
 	Although I expect when you use it in your project, you will appropriately convert this into its respective source/header pair             																 
 																				 
 **********************************************************************************/
-#include <xc.h>
 #include "SPI.h"
-
-// Interrupt service routine
-// Interrupt service routine
-
 
 void setupSPI(void){
     //PortB

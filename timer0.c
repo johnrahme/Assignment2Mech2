@@ -1,8 +1,5 @@
 
-#include <xc.h>
 #include "timer0.h"
-#define DEBOUNCE_REQ_COUNT 10 // Debounce for 10 ms
-#define LCD_REFRESH_RATE 200 // set refresh rate 
 
 void initializeTimer0(){
         
@@ -42,12 +39,13 @@ void flashLed(){
 
 void updateMovePattern(){
     
-    
+    //Update timer for pattern updating
     RTC_MOVE_PATTERN_COUNTER++;
       if(RTC_MOVE_PATTERN_COUNTER == MOVE_PATTERN_TIME){
             RTC_FLAG_MOVE_PATTERN = 1;
             RTC_MOVE_PATTERN_COUNTER = 0;
       }
+    //Update timer for checking for lost wall
     RTC_LOST_WALL_COUNTER++;
     if(RTC_LOST_WALL_COUNTER == LOST_WALL_TIME){
         RTC_LOST_WALL_FLAG = 1;

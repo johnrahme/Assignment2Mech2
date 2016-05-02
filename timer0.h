@@ -1,7 +1,9 @@
 #ifndef TIMER0_H
 #define TIMER0_H
-#include <xc.h>
 #include "common.h"
+
+#define DEBOUNCE_REQ_COUNT 10 // Debounce for 10 ms
+#define LCD_REFRESH_RATE 200 // set refresh rate 
 
 volatile unsigned int rtcCounter = 0;
 
@@ -22,7 +24,7 @@ volatile bit pb3Released = 0;
 volatile unsigned char pbCounter4 = 0;
 
 volatile bit updateLcdIRData = 0; //Update refresh bit flag
-volatile bit updateSensorsFlag = 0;
+volatile bit updateSensorsFlag = 0; //Sensors update at the same time as LCD
 volatile unsigned char irLcdCounter = 0; //LCD counters
 
 volatile bit RTC_FLAG_MOVE_PATTERN = 0;
@@ -33,12 +35,6 @@ volatile bit RTC_MOVE_SM_FLAG = 0;
 volatile unsigned char RTC_MOVE_SM_COUNTER = 0;
 volatile char SM_COUNTER_TIME = 5;
        
-volatile bit RTC_FLAG_90DEG = 0;
-volatile unsigned int RTC_90DEG_COUNTER = 0;
-
-volatile bit RTC_FLAG_20000MS = 0;
-volatile unsigned int RTC_20000MS_COUNTER = 0;
-
 volatile bit RTC_LOST_WALL_FLAG = 0;
 volatile unsigned int RTC_LOST_WALL_COUNTER = 0;
 volatile unsigned int LOST_WALL_TIME = 0;

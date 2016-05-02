@@ -1,9 +1,6 @@
 #include "patternHandler.h"
-#include "common.h"
-#include "scanner.h"
-#include "iRobot.h"
 
-void stopAllPatterns() {
+ void stopAllPatterns() {
     // Reset all the pattern flags
     patternDone = 1;
     squarePatternDone = 1;

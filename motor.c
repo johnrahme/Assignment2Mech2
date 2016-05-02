@@ -5,15 +5,7 @@
  * Created on den 1 april 2016, 16:36
  */
 
-
-#include <xc.h>
 #include "motor.h"
-#include "lcd.h"
-#include "SPI.h"
-#define CLOCKWISE 1 //Define clockwise and counter-clockwise
-#define COUNTER_CLOCKWISE 0
-#define DEG_PER_STEP 1.8 //Define step size
-#define SPEED 5 //Define motor speed
 
 void initializeMotor(){
     //Initialize motor to step 0 and write to LCD

@@ -3,6 +3,9 @@
 #define	SCANNER_H
 
 #include "common.h"
+#include "motor.h"
+#include "adConv.h"
+#include "timer0.h"
 
 #define WALL_FOLLOW_ANGLE 55
 int smallestDistance = 20000;

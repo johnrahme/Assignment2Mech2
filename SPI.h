@@ -1,8 +1,7 @@
 #ifndef SPI_H
 #define	SPI_H
+#include "common.h"
 
-#define TMR0_VAL 100	//timer0 start count
-#define STEPS180  200	//half steps for a 180 degree rotation
 #define SM_Control_Byte SSPBUF	//SM_Control_Byte is SSPBUF
 
 //Macros that you can call for ease of use

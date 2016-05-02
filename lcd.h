@@ -1,7 +1,6 @@
 #ifndef	LCD_H
 #define LCD_H
 
-#include <xc.h>
 #include "common.h"
 //defines
 #define RS RE0			//LCD Register Select

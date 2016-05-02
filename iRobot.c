@@ -1,9 +1,5 @@
-#include "common.h"
 #include "iRobot.h"
-#include "timer0.h"
-#include "lcd.h"
-#include "adConv.h"
-#include "patternHandler.h"
+
 
 void setupIRobot(void){
     ser_putch(START); //start create robot
@@ -340,9 +336,6 @@ char getCliffSensors(){
     return cliffSensors;
 }
 
-void updateBumpDropSensor(){
-    
-}
 void updateSensors(){
     if(updateSensorsFlag){
         //Check bumpCliffSensors
