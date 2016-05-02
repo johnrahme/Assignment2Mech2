@@ -16,7 +16,6 @@
 #include "motor.h"
 #include "adConv.h"
 #include "patternHandler.h"
-#include "scanner.h"
 
 #pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
 

@@ -100,7 +100,7 @@ void turnDegreesCCW(int degrees){
 }
 //-----MOVE PATTERNS START-----
 char followWallPatternV2(){
-    if(patternStage == 0 && RTC_FLAG_MOVE_PATTERN){
+    if(patternStage == 0|| (patternStage == 1 && RTC_FLAG_MOVE_PATTERN)){
         RTC_MOVE_PATTERN_COUNTER = 0; 
         MOVE_PATTERN_TIME = 10; //How often to update
         int valueOff = latestReadMeterValue-50;
@@ -150,8 +150,11 @@ char followWallPatternV2(){
         }
         lastValueOff = valueOff;
         turnAndDriveDirect(speedRightWheel,speedLeftWheel);
-        //Do not increment patternStage since we want this function to run forever
-        //patternStage++;
+        //Do not increment patternStage since we want this function to run forever, unless its stage 0
+        if(patternStage == 0){
+             patternStage++;
+        }
+       
         //Reset Pattern Flag
         RTC_FLAG_MOVE_PATTERN = 0;
     }
@@ -314,25 +317,25 @@ char getCliffSensors(){
     __delay_ms(5);
     ser_putch(9); //cliff front left
     __delay_ms(5);
-    cliffSensors = cliffSensors || ser_getch();
+    cliffSensors = cliffSensors | ser_getch();
     //Front left sensor
     ser_putch(142); //Set to read sensors
     __delay_ms(5);
     ser_putch(10); 
     __delay_ms(5);
-    cliffSensors = cliffSensors || ser_getch();
+    cliffSensors = cliffSensors | ser_getch();
     //Front Right sensor
     ser_putch(142); //Set to read sensors
     __delay_ms(5);
     ser_putch(11); 
     __delay_ms(5);
-    cliffSensors  = cliffSensors || ser_getch();
+    cliffSensors  = cliffSensors | ser_getch();
     //Cliff right sensor
     ser_putch(142); //Set to read sensors
     __delay_ms(5);
     ser_putch(12); 
     __delay_ms(5);
-    cliffSensors = cliffSensors || ser_getch();
+    cliffSensors = cliffSensors | ser_getch();
     return cliffSensors;
 }
 
@@ -341,14 +344,11 @@ void updateSensors(){
         //Check bumpCliffSensors
         
         char bumpSensor = getBumpDropSensor();
-        //char cliffSensors = getCliffSensors();
+        char cliffSensors = getCliffSensors();
         char stopMovement = bumpSensor&0b00011111;
-        lcdSetCursor(0x09);
-        lcdWriteToDigitBCD(stopMovement, 2, 0);
-        lcdSetCursor(0x0C);
-       // lcdWriteToDigitBCD(cliffSensors, 2, 0);
         
-        if(stopMovement){
+        
+        if(stopMovement||cliffSensors){
             LED0 = !LED0;
             stopAllPatterns();
             
@@ -356,7 +356,7 @@ void updateSensors(){
         //Update and write distance travelled
         distanceTraveled += getTraveledDistance();
         lcdSetCursor(0x40);
-        lcdWriteToDigitBCD(distanceTraveled, 4, 0);
+        lcdWriteToDigitBCD(distanceTraveled/10, 4, 0);
         updateSensorsFlag = 0;
     }
 }
