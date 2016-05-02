@@ -341,20 +341,21 @@ char getCliffSensors(){
 }
 
 void updateBumpDropSensor(){
-    char bumpSensor = getBumpDropSensor();
-    char cliffSensors = getCliffSensors();
-    char stopMovement = bumpSensor&0b00011111;
-    if(cliffSensors){
-        LED0 = !LED0;
-    }
-    if(stopMovement||cliffSensors){
-        stopAllPatterns();
-    }
+    
 }
 void updateSensors(){
     if(updateSensorsFlag){
         //Check bumpCliffSensors
-        updateBumpDropSensor();
+        
+        char bumpSensor = getBumpDropSensor();
+        char cliffSensors = getCliffSensors();
+        char stopMovement = bumpSensor&0b00011111;
+        if(cliffSensors){
+            LED0 = !LED0;
+        }
+        if(stopMovement||cliffSensors){
+            stopAllPatterns();
+        }
         //Update and write distance travelled
         distanceTraveled += getTraveledDistance();
         lcdSetCursor(0x40);

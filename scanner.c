@@ -26,7 +26,7 @@ void resetScanner() {
     lastReadSmallestStepDegree = 0;
 
     resetSensorToWallFollowFlag = 0;
-    resetToOrigin();
+    moveOld(stepsFromOrigin, 1);
     stepsFromOrigin = 0;
 }
 
@@ -75,8 +75,7 @@ char updateScanner() {
 //Just to move the motor back to its starting position
 
 void resetToOrigin() {
-    moveOld(stepsFromOrigin, 1);
-    stepsFromOrigin = 0;
+    
 }
 
 void resetSensorToWallFollow() {
