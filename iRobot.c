@@ -110,15 +110,15 @@ char followWallPatternV2(){
         char divideBy = 1;
         char times = 1;
         
-        if((valueOff>100)){
-            divideBy = 10;
+        if((valueOff>80)){
+            divideBy = 14;
         }
         else if(valueOff<-5){
             times = 15;
         }
         if(boostActivated&&valueOff>10){
             
-            times = times*3;
+            times = times*6;
         }
          speedRightWheel = 200+valueOff/divideBy*times;
          speedLeftWheel = 200-valueOff/divideBy*times;
@@ -130,7 +130,7 @@ char followWallPatternV2(){
             activateLostWall = 1;
             RTC_LOST_WALL_FLAG = 0;
             RTC_LOST_WALL_COUNTER = 0;
-            LOST_WALL_TIME = 4500;
+            LOST_WALL_TIME = 4000;
         }
         //If the lost wall timer is done, turn fast
         if(RTC_LOST_WALL_FLAG&&activateLostWall){
