@@ -16,7 +16,6 @@ void initializeTimer0(){
     TMR0IE = 1;
     ei();
 }
-
 //Set flag for refreshing LCD
 void lcdRefresh(){
     irLcdCounter++;
@@ -55,7 +54,7 @@ void updateMovePattern(){
 
 
 void stepperMotorCounter(){
-    
+    //SM counter to see if sm should move one step
     RTC_MOVE_SM_COUNTER++;
     if(RTC_MOVE_SM_COUNTER == SM_COUNTER_TIME){
         RTC_MOVE_SM_FLAG = 1;

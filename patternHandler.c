@@ -18,11 +18,11 @@
 }
 
 void updatePatterns() {
-
+    //Check if the follow wall pattern flag has been set
     if (followWallPatternStart) {
         followWallPatternV2();
     }
- 
+    //Update the scanner and see if the sensor should be reset or not
     if (updateScanner()&&!onlyScan) {
         moveToWallPatternDone = 0;
         resetSensorToWallFollowFlag = 1;

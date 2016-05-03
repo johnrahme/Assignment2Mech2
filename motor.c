@@ -55,7 +55,7 @@ void moveDeg(double deg){
     }
 }
 
-
+//Just make the motor turn with 1ms intervalls
 void moveMotorCont(void){
     time_count++;
     if(time_count % 1 == 0) {
@@ -65,6 +65,7 @@ void moveMotorCont(void){
      }
 }
 
+//Function to convert steps to degrees
 int stepToDegree(int steps){
     int degrees = (int) steps*(DEG_PER_STEP/2.0); 
     return degrees;

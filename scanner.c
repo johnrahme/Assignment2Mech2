@@ -12,6 +12,7 @@ void checkClosestDistance() {
 }
 
 void resetScanner() {
+    //Reset all values of the scanner and move it back to the origin
     smallestDistance = 20000;
     scanStepNumber = 0;
     smallestValueStep = 0;
@@ -22,11 +23,13 @@ void resetScanner() {
     lastReadSmallestStepDegree = 0;
 
     resetSensorToWallFollowFlag = 0;
+    //Just to move the motor back to its starting position
     moveOld(stepsFromOrigin, 1);
     stepsFromOrigin = 0;
 }
 
 void updateScannerBuffer() {
+    //Buffer the values of smallest distance and smallest step to use for later 
     scanStepNumber = 0; //reset scanner/stepper motor step number value
     lastReadSmallestDistance = smallestDistance;
     lastReadSmallestStepDegree = stepToDegree(smallestValueStep);
@@ -67,11 +70,6 @@ char updateScanner() {
 
     return 0; //return 0(meaning sequence is incomplete)
 
-}
-//Just to move the motor back to its starting position
-
-void resetToOrigin() {
-    
 }
 
 void resetSensorToWallFollow() {

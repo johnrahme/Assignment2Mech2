@@ -40,7 +40,9 @@ void interrupt isr(void)
         updateMovePattern();
         //Debounce the buttons
         debounceButtons();
+        //Increment SM counter
         stepperMotorCounter();
+        //Increment timer for lcd refresh
         lcdRefresh();
         
         //moveMotorCont();
@@ -61,11 +63,10 @@ void setup(void){
     // Set RB0-RB3 as pushbuttons and RB4-RB5 as LED:S
     TRISB = 0b00001111;  //For LED:s and pushbuttons  
     
-    //Set SPI to motor
+    
     setToMotorCW();
-    setupLCD();//THIS MIGHT FK UP THE ROBOT FROM MOVING DONT KNOW YET, GOTTA TRY IT
+    setupLCD();
     initializeADC();
-    setupSongs();
 }
 
 void main (void){
@@ -73,7 +74,7 @@ void main (void){
     LED1 = 0;
     LED0 = 0;
     
-    
+    // Start the adc conversion
     startADCConversion();
     while(1){   
         //move(10,0);
@@ -84,23 +85,25 @@ void main (void){
         }
         
         //Start the square pattern if PB0 is pressed
-        if(pb0Pressed){
-            playSong();
-            //distanceTraveled = 0; //added in to 0 the total distance traveled at the start of the function 
-            //squarePatternDone = 0;
+        if(pb0Pressed){          
+            // Start the square pattern
+            distanceTraveled = 0; //added in to 0 the total distance traveled at the start of the function 
+            squarePatternDone = 0;
             //followWallPatternStart = 1;
             //turnAndDriveDirect(100,200);
-            //patternDone = 0;
+            patternDone = 0;
             pb0Pressed = 0;
         }
         
         if(pb1Pressed){
+            // Start the straight pattern
             distanceTraveled = 0; //added in to 0 the total distance traveled at the start of the function
             straightPatternDone = 0;
             patternDone = 0;
             pb1Pressed = 0;
         }
         if(pb2Pressed){
+            // Start scanning closest wall without wall follow
             setScannerSpeed(8);
             scanRunning = 1;
             onlyScan = 1;
@@ -109,6 +112,7 @@ void main (void){
             pb2Pressed = 0;
         }
         if(pb3Pressed){
+            // Start scanning closest wall with wall follow
             setScannerSpeed(6);
             scanRunning = 1;
             distanceTraveled = 0;

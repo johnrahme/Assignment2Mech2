@@ -23,7 +23,6 @@ char resetSensorToWallFollowFlag = 0;
 char updateScanner();
 void updateScannerOldWay();
 void setScannerSpeed(char speed);
-void resetToOrigin();
 void resetSensorToWallFollow();
 
 void resetScanner();

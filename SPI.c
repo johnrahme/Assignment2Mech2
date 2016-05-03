@@ -23,7 +23,7 @@ void setupSPI(void){
 
 }
 
-//Transfers data through SPI using SSPBUF/SM_Control_Byte. Note used interchangeably here for illustration purposes
+//Transfers data through SPI using SSPBUF
 unsigned char spi_transfer(unsigned char data){
     unsigned char temp = 0;
 
