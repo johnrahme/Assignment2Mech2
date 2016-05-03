@@ -16,6 +16,7 @@
 #include "motor.h"
 #include "adConv.h"
 #include "patternHandler.h"
+#include "music.h"
 
 #pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
 
@@ -64,6 +65,7 @@ void setup(void){
     setToMotorCW();
     setupLCD();//THIS MIGHT FK UP THE ROBOT FROM MOVING DONT KNOW YET, GOTTA TRY IT
     initializeADC();
+    setupSongs();
 }
 
 void main (void){
@@ -83,11 +85,12 @@ void main (void){
         
         //Start the square pattern if PB0 is pressed
         if(pb0Pressed){
-            distanceTraveled = 0; //added in to 0 the total distance traveled at the start of the function 
-            squarePatternDone = 0;
+            playSong();
+            //distanceTraveled = 0; //added in to 0 the total distance traveled at the start of the function 
+            //squarePatternDone = 0;
             //followWallPatternStart = 1;
             //turnAndDriveDirect(100,200);
-            patternDone = 0;
+            //patternDone = 0;
             pb0Pressed = 0;
         }
         

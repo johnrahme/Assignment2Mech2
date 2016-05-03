@@ -111,7 +111,7 @@ char followWallPatternV2(){
         char times = 1;
         
         if((valueOff>80)){
-            divideBy = 14;
+            divideBy = 14; 
         }
         else if(valueOff<-5){
             times = 15;
