@@ -106,7 +106,7 @@ void main (void){
             pb2Pressed = 0;
         }
         if(pb3Pressed){
-            setScannerSpeed(8);
+            setScannerSpeed(6);
             scanRunning = 1;
             distanceTraveled = 0;
             onlyScan = 0;

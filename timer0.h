@@ -3,7 +3,7 @@
 #include "common.h"
 
 #define DEBOUNCE_REQ_COUNT 10 // Debounce for 10 ms
-#define LCD_REFRESH_RATE 200 // set refresh rate 
+#define LCD_REFRESH_RATE 100 // set refresh rate 
 
 volatile unsigned int rtcCounter = 0;
 
